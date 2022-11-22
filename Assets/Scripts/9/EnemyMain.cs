@@ -51,7 +51,7 @@ public class EnemyMain : MonoBehaviour
 	{
 		Debug.Log($"남은 HP : {CurHealthPoint}");
 		SearchPlayer();
-		if(AttackDelay == DelayTemp)
+		if (AttackDelay == DelayTemp)
 		{
 			StopAllCoroutines();
 			StartCoroutine("AttackLate");
@@ -135,28 +135,29 @@ public class EnemyMain : MonoBehaviour
 		Collider2D[] AttackZone = Physics2D.OverlapBoxAll(searchVec, AttackSize, 0);
 		foreach (Collider2D col in AttackZone)
 		{
-			Player player = col.GetComponent(player);
+			/*Player player = col.GetComponent(player);
 			if (player)
 			{
 				player.TakeDamage(AttackPoint);
-			}
+			}*/
 		}
 
-	#endregion
+		#endregion
 
-	
-	void DropMoney()
-	{
-		if (CurHealthPoint <= 0)
+
+		void DropMoney()
 		{
-			if (IsFixed)
+			if (CurHealthPoint <= 0)
 			{
-				//플레이어의 현재 재화에 FIxedMoney의 값을 더한다.
-			}
-			else if (!IsFixed)
-			{
-				int Money = Random.Range(MinMoney, MaxMoney);
-				//플레이어의 현재 재화에 Money의 값을 더한다.
+				if (IsFixed)
+				{
+					//플레이어의 현재 재화에 FIxedMoney의 값을 더한다.
+				}
+				else if (!IsFixed)
+				{
+					int Money = Random.Range(MinMoney, MaxMoney);
+					//플레이어의 현재 재화에 Money의 값을 더한다.
+				}
 			}
 		}
 	}
