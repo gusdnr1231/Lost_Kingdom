@@ -12,7 +12,7 @@ public class EnemyMain : MonoBehaviour
 	public float RayDistance;
 	public int AttackPoint;
 	public int AttackDelay, DelayTemp;
-	public BoxCollider2D AttackSize;
+	public Vector2 AttackSize;
 
 	[Header("재화 드롭 변수")]
 	public int MinMoney;
@@ -25,7 +25,6 @@ public class EnemyMain : MonoBehaviour
 	Collider2D EnemyCollider;
 	SpriteRenderer EnemyRenderer;
 	Animator EnemyAnima;
-	[SerializeField] GameObject Attackparent;
 
 	int lastMove = 1;
 	int nextMove;
@@ -33,7 +32,6 @@ public class EnemyMain : MonoBehaviour
 
 	void Awake()
 	{
-		/*transform.rotation = Quaternion.Euler(Vector3.zero);*/
 		EnemyRigidbody = this.GetComponent<Rigidbody2D>();
 		EnemyCollider = this.GetComponent<BoxCollider2D>();
 		EnemyRenderer = this.GetComponent<SpriteRenderer>();
@@ -50,7 +48,6 @@ public class EnemyMain : MonoBehaviour
 
 	void Update()
 	{
-		Debug.Log($"남은 HP : {CurHealthPoint}");
 		SearchPlayer();
 		if (AttackDelay == DelayTemp)
 		{
@@ -66,7 +63,10 @@ public class EnemyMain : MonoBehaviour
 		this.EnemyRigidbody.velocity = new Vector2(move * Speed, EnemyRigidbody.velocity.y);
 		Vector2 frontVector = new Vector2(EnemyRigidbody.position.x + move * 0.5f, EnemyRigidbody.position.y);
 		RaycastHit2D Ground = Physics2D.Raycast(frontVector, Vector3.down, 1, LayerMask.GetMask("Ground"));
-		if (Ground.collider == null)
+		Debug.DrawRay(frontVector, Vector3.down, Color.red);
+		RaycastHit2D Wall = Physics2D.Raycast(EnemyCollider.bounds.center, new Vector2(nextMove,0), 0.6f, LayerMask.GetMask("Ground"));
+		Debug.DrawRay(EnemyCollider.bounds.center, new Vector2(nextMove, 0), Color.blue);
+		if (Ground.collider == null || Wall.collider != null)
 		{
 			Turn();
 		}
@@ -91,7 +91,6 @@ public class EnemyMain : MonoBehaviour
 	void SearchPlayer()
 	{
 		Vector2 searchVec = new Vector2(lastMove, 0);
-		Debug.DrawRay(transform.position, searchVec, Color.red);
 		RaycastHit2D search = Physics2D.Raycast(EnemyCollider.bounds.center, searchVec, RayDistance, LayerMask.GetMask("Player"));
 		if (search.collider != null)
 		{
@@ -132,8 +131,7 @@ public class EnemyMain : MonoBehaviour
 
 	void Attack()
 	{
-		Vector2 searchVec = new Vector2(lastMove, 0);
-		Collider2D[] AttackZone = Physics2D.OverlapBoxAll(searchVec, AttackSize.size, 0);
+		Collider2D[] AttackZone = Physics2D.OverlapBoxAll(EnemyCollider.bounds.center, AttackSize, 0);
 		foreach (Collider2D col in AttackZone)
 		{
 			PlayerSkill player = col.GetComponent<PlayerSkill>();

@@ -73,6 +73,7 @@ public class PlayerSkill : MonoBehaviour
 
     public void PlayerGetDamage()
     {
+        Debug.Log("¾Æ¾ß");
         StartCoroutine("GetDamage");
     }
     private void PlayerAirAnimation()
