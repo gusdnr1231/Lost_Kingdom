@@ -63,7 +63,7 @@ public class PlayerDetect : MonoBehaviour
     }
     private void DetectDown()
     {
-        RaycastHit2D downRay = Physics2D.BoxCast(downBox.bounds.center, downBox.size, 0f, Vector2.down,0, layerGround);
+        RaycastHit2D downRay = Physics2D.BoxCast(downBox.bounds.center, downBox.size, 0f, Vector2.down, 0, layerGround);
         if (downRay)
         {
             IsGround = true;

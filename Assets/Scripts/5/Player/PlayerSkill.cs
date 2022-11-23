@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class PlayerSkill : MonoBehaviour
 {
+    [SerializeField] GameObject golemAttackPrefab;
     [SerializeField] GameObject windEffectPrefab;
     [SerializeField] Transform windEffectTransform;
+    [SerializeField] Transform golemAttackTransform;
     private PlayerDetect playerDetect;
     private PlayerElements playerElements;
     private SpriteRenderer playerSP;
@@ -36,6 +38,7 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
+        PlayerGolemAttack();    
         PlayerAirAnimation();
         PlayerWindJump();
         PlayerAttack();
@@ -67,14 +70,11 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-    //private void PlayerWallJump()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.Space) && playerDetect.IsWall && playerDetect.detectLeft)
-    //    {
-            
-    //    }
-    //}
 
+    public void PlayerGetDamage()
+    {
+        StartCoroutine("GetDamage");
+    }
     private void PlayerAirAnimation()
     {
         if (playerDetect.IsWall)
@@ -105,7 +105,20 @@ public class PlayerSkill : MonoBehaviour
             }
         }
     }
-
+    private void PlayerGolemAttack()
+    {
+        if(Input.GetKeyDown(KeyCode.Mouse1) && playerElements.ElementGround)
+        {
+            if (playerSP.flipX)
+            {
+                Instantiate(golemAttackPrefab, golemAttackTransform.position ,Quaternion.Euler(0f,180f,0));
+            }
+            else
+            {
+                Instantiate(golemAttackPrefab, golemAttackTransform.position, Quaternion.identity);
+            }
+        }
+    }
     private void PlayerWindJump()
     {
 
@@ -190,5 +203,11 @@ public class PlayerSkill : MonoBehaviour
         yield return new WaitForSeconds(1f);
         canRolling = true;
         yield break;
+    }
+    IEnumerator GetDamage()
+    {
+        playerSP.color = new Color(1, 1, 1, 0.5f);
+        yield return new WaitForSeconds(0.2f);
+        playerSP.color = new Color(1, 1, 1, 1);
     }
 }
