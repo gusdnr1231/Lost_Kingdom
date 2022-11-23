@@ -12,7 +12,7 @@ public class EnemyMain : MonoBehaviour
 	public float RayDistance;
 	public int AttackPoint;
 	public int AttackDelay, DelayTemp;
-	public Vector2 AttackSize;
+	public BoxCollider2D AttackSize;
 
 	[Header("재화 드롭 변수")]
 	public int MinMoney;
@@ -25,6 +25,7 @@ public class EnemyMain : MonoBehaviour
 	Collider2D EnemyCollider;
 	SpriteRenderer EnemyRenderer;
 	Animator EnemyAnima;
+	[SerializeField] GameObject Attackparent;
 
 	int lastMove = 1;
 	int nextMove;
@@ -132,14 +133,14 @@ public class EnemyMain : MonoBehaviour
 	void Attack()
 	{
 		Vector2 searchVec = new Vector2(lastMove, 0);
-		Collider2D[] AttackZone = Physics2D.OverlapBoxAll(searchVec, AttackSize, 0);
+		Collider2D[] AttackZone = Physics2D.OverlapBoxAll(searchVec, AttackSize.size, 0);
 		foreach (Collider2D col in AttackZone)
 		{
-			/*Player player = col.GetComponent(player);
+			PlayerSkill player = col.GetComponent<PlayerSkill>();
 			if (player)
 			{
-				player.TakeDamage(AttackPoint);
-			}*/
+				player.PlayerGetDamage(); // 데미지 입는거
+			}
 		}
 
 		#endregion
