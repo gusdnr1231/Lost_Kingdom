@@ -43,6 +43,10 @@ public class PlayerSkill : MonoBehaviour
         PlayerWindJump();
         PlayerAttack();
         PlayerRolling();
+        if (playerDetect.IsGround)
+        {
+            playerAnimator.SetBool("Air", false);
+        }
         if (playerDetect.IsAir)
         {
             playerAnimator.SetBool("Run", false);

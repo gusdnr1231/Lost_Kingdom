@@ -16,7 +16,7 @@ public class Follower : MonoBehaviour
     {
         delayPos.Enqueue(parentPos.position);
         
-        if(delayPos.Count > 60)
+        if(delayPos.Count > 15)
         {
             followPos = delayPos.Dequeue();
             

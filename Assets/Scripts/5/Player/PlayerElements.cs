@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerElements : MonoBehaviour
 {
+    [SerializeField] Transform elementsPosition;
     [SerializeField] SpriteRenderer groundPet;
     [SerializeField] SpriteRenderer waterPet;
     [SerializeField] SpriteRenderer windPet;
     [SerializeField] SpriteRenderer firePet;
+    [SerializeField] ParticleSystem groundEffect;
+    [SerializeField] ParticleSystem waterEffect;
+    [SerializeField] ParticleSystem windEffect;
+    [SerializeField] ParticleSystem fireEffect;
+
     public bool ElementWind { get; set; }
     public bool ElementFire { get; set; }
     public bool ElementGround { get; set; }
@@ -23,7 +29,11 @@ public class PlayerElements : MonoBehaviour
         windPet.color = new Color(1, 1, 1, 0);
     }
     void Update()
-    {   
+    {
+        groundEffect.transform.position = elementsPosition.position;
+        waterEffect.transform.position = elementsPosition.position;
+        windEffect.transform.position = elementsPosition.position;
+        fireEffect.transform.position = elementsPosition.position;
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if(elementsCount != 4)
@@ -38,6 +48,7 @@ public class PlayerElements : MonoBehaviour
             case 1:
                 if (playerSkill.GetWind)
                 {
+                    fireEffect.Play();
                     waterPet.color = new Color(1, 1, 1, 0);
                     firePet.color = new Color(1, 1, 1, 0);
                     groundPet.color = new Color(1, 1, 1, 0);
@@ -51,6 +62,7 @@ public class PlayerElements : MonoBehaviour
             case 2:
                 if (playerSkill.GetFire)
                 {
+                    groundEffect.Play();
                     windPet.color = new Color(1, 1, 1, 0);
                     groundPet.color = new Color(1, 1, 1, 0);
                     waterPet.color = new Color(1, 1, 1, 0);
@@ -64,6 +76,7 @@ public class PlayerElements : MonoBehaviour
             case 3:
                 if (playerSkill.GetGround)
                 {
+                    waterEffect.Play();
                     firePet.color = new Color(1, 1, 1, 0);
                     waterPet.color = new Color(1, 1, 1, 0);
                     windPet.color = new Color(1, 1, 1, 0);
@@ -77,6 +90,7 @@ public class PlayerElements : MonoBehaviour
             case 4:
                 if (playerSkill.GetWater)
                 {
+                    windEffect.Play();
                     groundPet.color = new Color(1, 1, 1, 0);
                     firePet.color = new Color(1, 1, 1, 0);
                     windPet.color = new Color(1, 1, 1, 0);
