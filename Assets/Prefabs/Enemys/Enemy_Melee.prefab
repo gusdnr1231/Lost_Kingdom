@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6f3e5210d0b154d87795519b06e3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealthPoint: 10
+  MaxHealthPoint: 3
   Speed: 3
   RayDistance: 0.6
   AttackPoint: 0

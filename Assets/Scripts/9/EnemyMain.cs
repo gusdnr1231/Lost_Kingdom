@@ -29,6 +29,7 @@ public class EnemyMain : MonoBehaviour
 	int lastMove = 1;
 	int nextMove;
 	float enemyMoving;
+	bool isDead = false;
 
 	void Awake()
 	{
@@ -64,7 +65,7 @@ public class EnemyMain : MonoBehaviour
 		Vector2 frontVector = new Vector2(EnemyRigidbody.position.x + move * 0.5f, EnemyRigidbody.position.y);
 		RaycastHit2D Ground = Physics2D.Raycast(frontVector, Vector3.down, 1, LayerMask.GetMask("Ground"));
 		Debug.DrawRay(frontVector, Vector3.down, Color.red);
-		RaycastHit2D Wall = Physics2D.Raycast(EnemyCollider.bounds.center, new Vector2(nextMove,0), 0.6f, LayerMask.GetMask("Ground"));
+		RaycastHit2D Wall = Physics2D.Raycast(EnemyCollider.bounds.center, new Vector2(nextMove, 0), 0.6f, LayerMask.GetMask("Ground"));
 		Debug.DrawRay(EnemyCollider.bounds.center, new Vector2(nextMove, 0), Color.blue);
 		if (Ground.collider == null || Wall.collider != null)
 		{
@@ -92,29 +93,32 @@ public class EnemyMain : MonoBehaviour
 	{
 		Vector2 searchVec = new Vector2(lastMove, 0);
 		RaycastHit2D search = Physics2D.Raycast(EnemyCollider.bounds.center, searchVec, RayDistance, LayerMask.GetMask("Player"));
-		if (search.collider != null)
+		if (isDead == false)
 		{
-			EnemyRenderer.flipX = lastMove == -1;
-			nextMove = lastMove;
-			enemyMoving = 0;
-			Moving(0);
-			Debug.Log("플레이어 감지");
-			if (AttackDelay == 0)
+			if (search.collider != null)
 			{
-				Attack();
-				EnemyAnima.SetTrigger("Attack");
-				AttackDelay = DelayTemp;
+				EnemyRenderer.flipX = lastMove == -1;
+				nextMove = lastMove;
+				enemyMoving = 0;
+				Moving(0);
+				Debug.Log("플레이어 감지");
+				if (AttackDelay == 0)
+				{
+					Attack();
+					EnemyAnima.SetTrigger("Attack");
+					AttackDelay = DelayTemp;
+				}
 			}
-		}
-		else if (search.collider == null)
-		{
-			if (nextMove != 0)
+			else if (search.collider == null)
 			{
-				enemyMoving = 1;
-				lastMove = nextMove;
+				if (nextMove != 0)
+				{
+					enemyMoving = 1;
+					lastMove = nextMove;
+				}
+				else if (nextMove == 0) enemyMoving = 0;
+				Moving(nextMove);
 			}
-			else if (nextMove == 0) enemyMoving = 0;
-			Moving(nextMove);
 		}
 	}
 
@@ -140,24 +144,41 @@ public class EnemyMain : MonoBehaviour
 				player.PlayerGetDamage(); // 데미지 입는거
 			}
 		}
-
-		#endregion
-
-
-		/*void DropMoney()
-		{
-			if (CurHealthPoint <= 0)
-			{
-				if (IsFixed)
-				{
-					//플레이어의 현재 재화에 FIxedMoney의 값을 더한다.
-				}
-				else if (!IsFixed)
-				{
-					int Money = Random.Range(MinMoney, MaxMoney);
-					//플레이어의 현재 재화에 Money의 값을 더한다.
-				}
-			}
-		}*/
 	}
+
+	public void Hit()
+	{
+		Debug.Log("적: 아야");
+		if (CurHealthPoint > 0)
+		{
+			CurHealthPoint--;
+			EnemyAnima.SetTrigger("Hit");
+		}
+		if (CurHealthPoint == 0)
+		{
+			isDead = true;
+			EnemyRigidbody.velocity = Vector2.zero;
+			EnemyAnima.SetBool("Dead", isDead);
+			Destroy(gameObject, EnemyAnima.GetCurrentAnimatorStateInfo(0).length);
+		}
+	}
+
+	#endregion
+
+
+	/*void DropMoney()
+	{
+		if (CurHealthPoint <= 0)
+		{
+			if (IsFixed)
+			{
+				//플레이어의 현재 재화에 FIxedMoney의 값을 더한다.
+			}
+			else if (!IsFixed)
+			{
+				int Money = Random.Range(MinMoney, MaxMoney);
+				//플레이어의 현재 재화에 Money의 값을 더한다.
+			}
+		}
+	}*/
 }
