@@ -144,7 +144,7 @@ public class EnemyMain : MonoBehaviour
 		#endregion
 
 
-		void DropMoney()
+		/*void DropMoney()
 		{
 			if (CurHealthPoint <= 0)
 			{
@@ -158,6 +158,6 @@ public class EnemyMain : MonoBehaviour
 					//플레이어의 현재 재화에 Money의 값을 더한다.
 				}
 			}
-		}
+		}*/
 	}
 }
