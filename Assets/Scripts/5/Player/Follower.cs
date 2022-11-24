@@ -8,9 +8,13 @@ public class Follower : MonoBehaviour
     private Queue<Vector3> delayPos = new Queue<Vector3>();
     private Vector3 followPos;
     private SpriteRenderer spriteRendere;
+
+    SliderController sliderController;
     void Start()
     {
         spriteRendere = GetComponent<SpriteRenderer>();
+
+        sliderController = FindObjectOfType<SliderController>();
     }
     void Update()
     {

@@ -21,13 +21,15 @@ public class PopEvent : MonoBehaviour
     public GameObject inventoryPanel;
     public bool isPopUpTheInventoryPanel = false;
 
+    SliderController sliderController;
+
     public float duration = 0.2f;
 
     private Sequence seq;
 
     private void Awake()
     {
-        
+        sliderController = FindObjectOfType<SliderController>();
     }
 
     private void Start()
