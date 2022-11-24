@@ -44,12 +44,12 @@ public class PopEvent : MonoBehaviour
             DoPopUp();
         }
 
-        if (!isPopUpTheInventoryPanel && Input.GetKeyDown(KeyCode.Tab))
+        if (!isPopUpTheInventoryPanel && Input.GetKeyDown(KeyCode.E))
         {
             OnInventoryPanel();
             isPopUpTheInventoryPanel = true;
         }
-        else if(isPopUpTheInventoryPanel && Input.GetKeyDown(KeyCode.Tab))
+        else if(isPopUpTheInventoryPanel && Input.GetKeyDown(KeyCode.E))
         {
             OffInventoryPanel();
             isPopUpTheInventoryPanel = false;
@@ -130,6 +130,6 @@ public class PopEvent : MonoBehaviour
 
     public void QuitToManu()
     {
-        SceneManager.LoadScene("Intro");
+        SceneManager.LoadScene(4);
     }
 }
