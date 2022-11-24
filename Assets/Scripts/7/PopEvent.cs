@@ -9,12 +9,17 @@ using UnityEngine.SceneManagement;
 
 public class PopEvent : MonoBehaviour
 {
+    [Header("옵션")]
     public RectTransform upperBlock;
     public RectTransform underBlock;
     public RectTransform optionsPanel;
     public GameObject optionPanel;
     public GameObject optionButtonPanel;
     public RectTransform optionButtonPanelRect;
+    public RectTransform textRect;
+    [Header("인벤토리")]
+    public GameObject inventoryPanel;
+    public bool isPopUpTheInventoryPanel = false;
 
     public float duration = 0.2f;
 
@@ -35,6 +40,17 @@ public class PopEvent : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             DoPopUp();
+        }
+
+        if (!isPopUpTheInventoryPanel && Input.GetKeyDown(KeyCode.Tab))
+        {
+            OnInventoryPanel();
+            isPopUpTheInventoryPanel = true;
+        }
+        else if(isPopUpTheInventoryPanel && Input.GetKeyDown(KeyCode.Tab))
+        {
+            OffInventoryPanel();
+            isPopUpTheInventoryPanel = false;
         }
     }
 
@@ -71,12 +87,12 @@ public class PopEvent : MonoBehaviour
         seq.Append(upperBlock.DOLocalMoveY(15f, duration).SetEase(Ease.InCubic));
         seq.Join(underBlock.DOLocalMoveY(-15f, duration).SetEase(Ease.InCubic));
         seq.Join(optionsPanel.DOScaleY(0, duration).SetEase(Ease.InCubic));
-        
 
         optionButtonPanel.SetActive(true);
         seq.Append(upperBlock.DOLocalMoveY(85f, duration).SetEase(Ease.InCubic));
         seq.Join(underBlock.DOLocalMoveY(-130f, duration).SetEase(Ease.InCubic));
         seq.Join(optionButtonPanelRect.DOScaleY(1, duration).SetEase(Ease.InCubic));
+        seq.Join(textRect.DOLocalMoveY(130f, duration).SetEase(Ease.InCubic));
         seq.AppendCallback(() =>
         {
             seq.Kill();
@@ -98,6 +114,16 @@ public class PopEvent : MonoBehaviour
         {
             seq.Kill();
         });
+    }
+
+    public void OnInventoryPanel()
+    {
+        inventoryPanel.SetActive(true);
+    }
+
+    public void OffInventoryPanel()
+    {
+        inventoryPanel.SetActive(false);
     }
 
     public void QuitToManu()
