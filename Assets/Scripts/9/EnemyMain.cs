@@ -141,12 +141,12 @@ public class EnemyMain : MonoBehaviour
 			PlayerSkill player = col.GetComponent<PlayerSkill>();
 			if (player)
 			{
-				player.PlayerGetDamage(); // 데미지 입는거
+				player.PlayerGetDamage();
 			}
 		}
 	}
 
-	public void Hit()
+	public void Hit() //데미지 입기
 	{
 		Debug.Log("적: 아야");
 		if (CurHealthPoint > 0)

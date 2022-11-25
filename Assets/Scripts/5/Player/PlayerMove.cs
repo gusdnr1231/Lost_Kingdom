@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]  float windJumpPower;
     [SerializeField]  float playerDashSpeed;
     [SerializeField]  float playerCurrentSpeed;
+    [SerializeField] GameObject AttackZoneParent;
 
     public bool IsMove { get; set; }
     public float DirX { get; set; }
@@ -46,11 +47,12 @@ public class PlayerMove : MonoBehaviour
         if (!playerDetect.detectLeft && h == -1)
         {
             playerRigid.velocity = new Vector2(h * playerCurrentSpeed, playerRigid.velocity.y);
+            AttackZoneParent.transform.localScale = new Vector3(h * -1, 1, 1);
         }
         else if (!playerDetect.detectRight && h == 1)
         {
-
             playerRigid.velocity = new Vector2(h * playerCurrentSpeed, playerRigid.velocity.y);
+            AttackZoneParent.transform.localScale = new Vector3(h * -1, 1, 1);
         }
         else
         {
