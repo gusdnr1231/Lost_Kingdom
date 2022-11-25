@@ -74,8 +74,8 @@ public class PopEvent : MonoBehaviour
         seq = DOTween.Sequence();
 
         optionPanel.SetActive(true);
-        seq.Append(upperBlock.DOLocalMoveY(85f, duration).SetEase(Ease.InCubic));
-        seq.Join(underBlock.DOLocalMoveY(-85f, duration).SetEase(Ease.InCubic));
+        seq.Append(upperBlock.DOLocalMoveY(250f, duration).SetEase(Ease.InCubic));
+        seq.Join(underBlock.DOLocalMoveY(-250f, duration).SetEase(Ease.InCubic));
         seq.Join(optionsPanel.DOScaleY(1, duration).SetEase(Ease.InCubic));
         seq.AppendCallback(() => {
             seq.Kill();
@@ -91,10 +91,10 @@ public class PopEvent : MonoBehaviour
         seq.Join(optionsPanel.DOScaleY(0, duration).SetEase(Ease.InCubic));
 
         optionButtonPanel.SetActive(true);
-        seq.Append(upperBlock.DOLocalMoveY(85f, duration).SetEase(Ease.InCubic));
-        seq.Join(underBlock.DOLocalMoveY(-130f, duration).SetEase(Ease.InCubic));
+        seq.Append(upperBlock.DOLocalMoveY(250f, duration).SetEase(Ease.InCubic));
+        seq.Join(underBlock.DOLocalMoveY(-250f, duration).SetEase(Ease.InCubic));
         seq.Join(optionButtonPanelRect.DOScaleY(1, duration).SetEase(Ease.InCubic));
-        seq.Join(textRect.DOLocalMoveY(130f, duration).SetEase(Ease.InCubic));
+        seq.Join(textRect.DOLocalMoveY(310f, duration).SetEase(Ease.InCubic));
         seq.AppendCallback(() =>
         {
             seq.Kill();
@@ -109,8 +109,8 @@ public class PopEvent : MonoBehaviour
         seq.Join(underBlock.DOLocalMoveY(-15f, duration).SetEase(Ease.InCubic));
         seq.Join(optionButtonPanelRect.DOScaleY(0, duration).SetEase(Ease.InCubic));
 
-        seq.Append(upperBlock.DOLocalMoveY(85f, duration).SetEase(Ease.InCubic));
-        seq.Join(underBlock.DOLocalMoveY(-85f, duration).SetEase(Ease.InCubic));
+        seq.Append(upperBlock.DOLocalMoveY(250f, duration).SetEase(Ease.InCubic));
+        seq.Join(underBlock.DOLocalMoveY(-250f, duration).SetEase(Ease.InCubic));
         seq.Join(optionsPanel.DOScaleY(1, duration).SetEase(Ease.InCubic));
         seq.AppendCallback(() =>
         {
@@ -126,6 +126,11 @@ public class PopEvent : MonoBehaviour
     public void OffInventoryPanel()
     {
         inventoryPanel.SetActive(false);
+    }
+
+    public void PopUpTheNPCUI()
+    {
+
     }
 
     public void QuitToManu()
