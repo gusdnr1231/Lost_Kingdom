@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class NPCPopUp : MonoBehaviour
 {
-    [SerializeField] BoxCollider2D boxCol2d;
+    PopEvent popEvent;
+    public bool isPopUpTheNPCUI = false;
+    public bool isPlayerHere = false;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public LayerMask layerMask;
+
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
+        popEvent = FindObjectOfType<PopEvent>();
+    }
 
+    private void Update()
+    {
+        if (!isPlayerHere && Input.GetKeyDown(KeyCode.R))
+        {
+            popEvent.PopUpTheNPCUI();
+            isPlayerHere = true;
+        }
+        else if(isPlayerHere && Input.GetKeyDown(KeyCode.R))
+        {
+            popEvent.PopDownTheNPCUI();
+            isPlayerHere = false;
         }
     }
 }

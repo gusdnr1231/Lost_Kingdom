@@ -20,6 +20,14 @@ public class PopEvent : MonoBehaviour
     [Header("인벤토리")]
     public GameObject inventoryPanel;
     public bool isPopUpTheInventoryPanel = false;
+    [Header("NPC UI")]
+    public RectTransform npcUpperBlock;
+    public RectTransform npcUnderBlock;
+    public RectTransform rectNPCPanel;
+    public GameObject npcPanel;
+
+    bool lif;
+
 
     SliderController sliderController;
 
@@ -54,6 +62,18 @@ public class PopEvent : MonoBehaviour
             OffInventoryPanel();
             isPopUpTheInventoryPanel = false;
         }
+
+        /*if (!lif && Input.GetKeyDown(KeyCode.R))
+        {
+            PopUpTheNPCUI();
+            lif = true;
+        }
+        else if(lif && Input.GetKeyDown(KeyCode.R))
+        {
+            PopDownTheNPCUI();
+            lif = false;
+        }*/
+        
     }
 
     //15 -15 85 -85 
@@ -130,7 +150,28 @@ public class PopEvent : MonoBehaviour
 
     public void PopUpTheNPCUI()
     {
+        seq = DOTween.Sequence();
 
+        npcPanel.SetActive(true);
+        seq.Append(npcUpperBlock.DOLocalMoveY(255f, duration).SetEase(Ease.InCubic));
+        seq.Join(npcUnderBlock.DOLocalMoveY(-220f, duration).SetEase(Ease.InCubic));
+        seq.Join(rectNPCPanel.DOScaleY(1, duration).SetEase(Ease.InCubic));
+        seq.AppendCallback(() => {
+            seq.Kill();
+        });
+    }
+
+    public void PopDownTheNPCUI()
+    {
+        seq = DOTween.Sequence();
+
+        seq.Append(npcUpperBlock.DOLocalMoveY(50f, duration).SetEase(Ease.InCubic));
+        seq.Join(npcUnderBlock.DOLocalMoveY(-50f, duration).SetEase(Ease.InCubic));
+        seq.Join(rectNPCPanel.DOScaleY(0, duration).SetEase(Ease.InCubic));
+        seq.AppendCallback(() => {
+            npcPanel.SetActive(false);
+            seq.Kill();
+        });
     }
 
     public void QuitToManu()
