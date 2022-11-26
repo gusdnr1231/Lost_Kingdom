@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class NPCPopUp : MonoBehaviour
 {
     PopEvent popEvent;
-    public bool isPopUpTheNPCUI = false;
-    public bool isPlayerHere = false;
-
-    public LayerMask layerMask;
+    [SerializeField] BoxCollider2D boxCol2d;
+    public LayerMask playerLayer;
+    [SerializeField] TextMeshProUGUI text;
 
     private void Start()
     {
@@ -17,15 +18,16 @@ public class NPCPopUp : MonoBehaviour
 
     private void Update()
     {
-        if (!isPlayerHere && Input.GetKeyDown(KeyCode.R))
+        Collider2D[] cols = Physics2D.OverlapBoxAll(boxCol2d.bounds.center, boxCol2d.bounds.size, 0f, playerLayer);
+
+        if(cols.Length > 0 && Input.GetKeyDown(KeyCode.R))
         {
+            popEvent.npcText.text = text.text;
             popEvent.PopUpTheNPCUI();
-            isPlayerHere = true;
         }
-        else if(isPlayerHere && Input.GetKeyDown(KeyCode.R))
+        else if(cols.Length == 0)
         {
             popEvent.PopDownTheNPCUI();
-            isPlayerHere = false;
         }
     }
 }

@@ -25,6 +25,11 @@ public class PopEvent : MonoBehaviour
     public RectTransform npcUnderBlock;
     public RectTransform rectNPCPanel;
     public GameObject npcPanel;
+    public TextMeshProUGUI npcText;
+    [Header("¿ø¼Ò È¹µæ")]
+    public RectTransform elementUI;
+    public TextMeshProUGUI elementText;
+    public GameObject elementPanel;
 
     bool lif;
 
@@ -170,6 +175,27 @@ public class PopEvent : MonoBehaviour
         seq.Join(rectNPCPanel.DOScaleY(0, duration).SetEase(Ease.InCubic));
         seq.AppendCallback(() => {
             npcPanel.SetActive(false);
+            seq.Kill();
+        });
+    }
+
+    public void PopUpTheElementUI()
+    {
+        seq = DOTween.Sequence();
+
+        elementPanel.SetActive(true);
+        seq.Join(elementUI.DOScaleY(1, duration).SetEase(Ease.InCubic));
+        seq.AppendCallback(() => {
+            seq.Kill();
+        });
+    }
+    public void PopDownTheElementUI()
+    {
+        seq = DOTween.Sequence();
+
+        elementPanel.SetActive(false);
+        seq.Join(elementUI.DOScaleY(0, duration).SetEase(Ease.InCubic));
+        seq.AppendCallback(() => {
             seq.Kill();
         });
     }
