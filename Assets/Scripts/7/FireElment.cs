@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,26 +13,43 @@ public class FireElment : MonoBehaviour
 
     private void Update()
     {
-        CheckUseSkill();
-
         if (onFire)
         {
-            StartCoroutine(OnFire());
+            FireCoroutineStart();
         }
     }
 
-    public void CheckUseSkill()
+    /*public void CheckUseSkill()
     {
         Collider2D[] cols = Physics2D.OverlapBoxAll(boxCol2d.bounds.center, boxCol2d.bounds.size, 0f, playerLayer);
 
-        if(cols.Length > 0 && Input.GetKeyDown(KeyCode.Alpha3))
+        try
         {
-            onFire = true;
+            if (cols.Length > 0 && Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                onFire = true;
+            }
+            else if (cols.Length == 0)
+            {
+                onFire = false;
+            }
         }
-        else if(cols.Length == 0)
+        catch(Exception e)
         {
-            onFire = false;
+            if (cols.Length > 0 && Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                onFire = true;
+            }
+            else if (cols.Length >= 0)
+            {
+                onFire = false;
+            }
         }
+    }*/
+
+    public void FireCoroutineStart()
+    {
+        StartCoroutine(OnFire());
     }
 
     IEnumerator OnFire()
