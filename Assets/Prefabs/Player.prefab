@@ -711,6 +711,12 @@ MonoBehaviour:
   - {fileID: 6595971139480259913}
   - {fileID: 1181397763116652976}
   - {fileID: 7025610868380990203}
+  enemy:
+    serializedVersion: 2
+    m_Bits: 0
+  boss:
+    serializedVersion: 2
+    m_Bits: 8192
   canWindJump: 0
   GetWind: 0
   GetFire: 0

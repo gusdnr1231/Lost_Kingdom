@@ -415,10 +415,10 @@ TextureImporter:
     second: Sword Master Sprite Sheet 90x37 1_136
   - first:
       213: -6281623343939503887
-    second: Sword Master Sprite Sheet 90x37 1_137
+    second: hit1
   - first:
       213: 6915952250052228806
-    second: Sword Master Sprite Sheet 90x37 1_138
+    second: hit2
   - first:
       213: -5778504158187921105
     second: 26-1Dead
@@ -3406,15 +3406,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sword Master Sprite Sheet 90x37 1_137
+      name: hit1
       rect:
         serializedVersion: 2
         x: 0
         y: 37
         width: 90
         height: 37
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.305, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3427,15 +3427,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sword Master Sprite Sheet 90x37 1_138
+      name: hit2
       rect:
         serializedVersion: 2
         x: 90
         y: 37
         width: 90
         height: 37
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.305, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
