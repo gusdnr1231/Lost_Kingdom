@@ -9,6 +9,7 @@ public class PlayerSkill : MonoBehaviour
     [SerializeField] GameObject windEffectPrefab;
     [SerializeField] Transform windEffectTransform;
     [SerializeField] Transform golemAttackTransform;
+    [SerializeField] BoxCollider2D[] attackZones;
     private PlayerDetect playerDetect;
     private PlayerElements playerElements;
     private SpriteRenderer playerSP;
@@ -27,6 +28,7 @@ public class PlayerSkill : MonoBehaviour
     public bool GetFire = false;
     public bool GetWater = false;
     public bool GetGround = false;
+
     void Start()
     {
         playerElements = GetComponentInChildren<PlayerElements>();
@@ -74,9 +76,9 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-
     public void PlayerGetDamage()
     {
+        Debug.Log("아야");
         StartCoroutine("GetDamage");
     }
     private void PlayerAirAnimation()
@@ -147,13 +149,15 @@ public class PlayerSkill : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0) && !attack1)
             {
                 attack1 = true;
+                AttackEnemy(0);
                 StartCoroutine("AttackCooldown");
                 playerAnimator.SetTrigger("Attack1");
             }
             else if (Input.GetKeyDown(KeyCode.Mouse0) && !attack2 && attack1 && canNextAttack)
             {
                 StopCoroutine("AttackCooldown");
-                StartCoroutine("AttackCooldown");
+				AttackEnemy(1);
+				StartCoroutine("AttackCooldown");
                 attack2 = true;
                 playerAnimator.SetTrigger("Attack2");
                 Debug.Log("2");
@@ -161,7 +165,8 @@ public class PlayerSkill : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Mouse0) && attack2 && !attack3 && canNextAttack)
             {
                 StopCoroutine("AttackCooldown");
-                StartCoroutine("AttackCooldown");
+				AttackEnemy(2);
+				StartCoroutine("AttackCooldown");
                 attack3 = true;
                 playerAnimator.SetTrigger("Attack3");
                 Debug.Log("3");
@@ -169,13 +174,28 @@ public class PlayerSkill : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Mouse0) && attack3 && !attack4 && canNextAttack)
             {
                 StopCoroutine("AttackCooldown");
-                StartCoroutine("AttackCooldown"); // 이거 바꾸면 공격속도 조절가능
+				AttackEnemy(3);
+				StartCoroutine("AttackCooldown"); // 이거 바꾸면 공격속도 조절가능
                 attack4 = true;
                 playerAnimator.SetTrigger("Attack4");
                 Debug.Log("4");
             }
         }
     }
+
+    private void AttackEnemy(int colliderNumber)
+    {
+		Collider2D[] AttackZone = Physics2D.OverlapBoxAll(attackZones[colliderNumber].bounds.center, attackZones[colliderNumber].size, 0);
+		foreach (Collider2D col in AttackZone)
+		{
+			EnemyMain enemy = col.GetComponent<EnemyMain>();
+			if (enemy)
+			{
+				enemy.Hit();
+			}
+		}
+	}
+
     private void AttackController()
     {
         canNextAttack = false;
