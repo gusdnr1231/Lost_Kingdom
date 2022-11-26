@@ -5,7 +5,6 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     [SerializeField] BoxCollider2D playerDetectSize;
-    [SerializeField] BoxCollider2D canAttackSize;
     [SerializeField] BoxCollider2D dashAttackSize;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] List<Collider2D> attack1Size;
@@ -16,11 +15,8 @@ public class BossController : MonoBehaviour
     private Rigidbody2D rigid;
     private Animator animator;
     private Vector2 moveDir;
-    [SerializeField] float attackCoolTime;
-    private float currentAttackTime;
-    public bool IsAttack;
-    public bool canDashAttack;
     public bool canAttack;
+    public bool IsAttack;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -29,31 +25,16 @@ public class BossController : MonoBehaviour
     }
     void Update()
     {
-        currentAttackTime += Time.deltaTime;
+
         DetectPlayer();
-        if (rigid.velocity.x != 0)
-        {
-            animator.SetBool("Walk", true);
-        }
-        else
-        {
-            animator.SetBool("Walk", false);
-        }
-        if (moveDir.x > 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (moveDir.x < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
+        rigid.velocity = moveDir * moveSpeed;
+
     }
     void DetectPlayer()
     {
         Collider2D[] detect = Physics2D.OverlapBoxAll(playerDetectSize.bounds.center, playerDetectSize.size, 0f, playerLayer);
-        Collider2D[] canAttackBox = Physics2D.OverlapBoxAll(playerDetectSize.bounds.center, canAttackSize.size, 0f, playerLayer);
-        Collider2D[] attack2 = Physics2D.OverlapBoxAll(playerDetectSize.bounds.center, attack2Size.size, 0f, playerLayer);
-        Collider2D[] dashAttack = Physics2D.OverlapBoxAll(playerDetectSize.bounds.center, dashAttackSize.size, 0f, playerLayer);
+        Collider2D[] attack2 = Physics2D.OverlapBoxAll(attack2Size.bounds.center, attack2Size.size, 0f, playerLayer);
+        Collider2D[] dashAttack = Physics2D.OverlapBoxAll(dashAttackSize.bounds.center, dashAttackSize.size, 0f, playerLayer);
         List<Collider2D> attack1 = new List<Collider2D>();
         List<Collider2D> attack3 = new List<Collider2D>();
 
@@ -77,30 +58,39 @@ public class BossController : MonoBehaviour
                 }
             }
         }
-        if(detect.Length > 0)
+        if (detect.Length > 0)
         {
-            if (canAttack)
+            if (attack2.Length > 0)
             {
-                if(dashAttack.Length > 0)
-                {
-
-                }
-                rigid.velocity = new Vector2(0, 0);
+                moveDir = Vector2.zero;
+                animator.SetBool("Walk", false);
             }
-            else 
+            else if (!IsAttack && Mathf.Abs(detect[0].transform.position.x - transform.position.x) > 8)
             {
                 moveDir = detect[0].transform.position - transform.position;
                 moveDir.y = 0;
-                rigid.velocity = moveDir * moveSpeed;
+                if (moveDir.x < 0)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+                else
+                {
+                    transform.localScale = Vector3.one;
+                }
+                animator.SetBool("Walk", true);
+            }
+            else
+            {
+                moveDir = Vector2.zero;
+                animator.SetBool("Walk", false);
             }
         }
         else
         {
             moveDir = Vector2.zero;
+            animator.SetBool("Walk", false);
         }
     }
-    IEnumerator DashAttack()
-    {
-        yield return null;
-    }
+
+
 }
