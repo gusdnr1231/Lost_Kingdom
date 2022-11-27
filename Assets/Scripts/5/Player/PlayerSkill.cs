@@ -10,6 +10,8 @@ public class PlayerSkill : MonoBehaviour
     [SerializeField] Transform windEffectTransform;
     [SerializeField] Transform golemAttackTransform;
     [SerializeField] BoxCollider2D[] attackZones;
+    [SerializeField] LayerMask enemy;
+    [SerializeField] LayerMask boss;
     private PlayerDetect playerDetect;
     private PlayerElements playerElements;
     private SpriteRenderer playerSP;
@@ -28,7 +30,6 @@ public class PlayerSkill : MonoBehaviour
     public bool GetFire = false;
     public bool GetWater = false;
     public bool GetGround = false;
-
     void Start()
     {
         playerElements = GetComponentInChildren<PlayerElements>();
@@ -40,46 +41,53 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-        PlayerGolemAttack();    
-        PlayerAirAnimation();
-        PlayerWindJump();
-        PlayerAttack();
-        PlayerRolling();
-        if (playerDetect.IsGround)
-        {
-            playerAnimator.SetBool("Air", false);
-        }
-        if (playerDetect.IsAir)
-        {
-            playerAnimator.SetBool("Run", false);
-        }
-        else
-        {
-            playerAnimator.SetBool("Jump", false);
-            if (playerMove.DirX == 1 || playerMove.DirX == -1)
+            PlayerGolemAttack();
+            PlayerAirAnimation();
+            PlayerWindJump();
+            PlayerAttack();
+            PlayerRolling();
+            if (playerDetect.IsGround)
             {
-                playerAnimator.SetBool("Run", true);
+                playerAnimator.SetBool("Air", false);
             }
+            if (playerDetect.IsAir)
+            {
+                playerAnimator.SetBool("Run", false);
+            }
+            else
+            {
+                playerAnimator.SetBool("Jump", false);
+                if (playerMove.DirX == 1 || playerMove.DirX == -1)
+                {
+                    playerAnimator.SetBool("Run", true);
+                }
 
-        }
-        if (playerMove.DirX == 1 && !playerMove.isWallJumping)
-        {
-            playerSP.flipX = false;
-        }
-        else if (playerMove.DirX == -1 && !playerMove.isWallJumping)
-        {
-            playerSP.flipX = true;
-        }
-        else
-        {
-            playerAnimator.SetBool("Run", false);
-        }
+            }
+            if (playerMove.DirX == 1 && !playerMove.isWallJumping)
+            {
+                playerSP.flipX = false;
+            }
+            else if (playerMove.DirX == -1 && !playerMove.isWallJumping)
+            {
+                playerSP.flipX = true;
+            }
+            else
+            {
+                playerAnimator.SetBool("Run", false);
+            }
     }
 
     public void PlayerGetDamage()
     {
-        Debug.Log("아야");
-        StartCoroutine("GetDamage");
+        if (!isRolling)
+        {
+            Debug.Log("아야");
+            StartCoroutine("Hit");
+        }
+        else
+        {
+            Debug.Log("느려");
+        }
     }
     private void PlayerAirAnimation()
     {
@@ -185,8 +193,10 @@ public class PlayerSkill : MonoBehaviour
 
     private void AttackEnemy(int colliderNumber)
     {
-		Collider2D[] AttackZone = Physics2D.OverlapBoxAll(attackZones[colliderNumber].bounds.center, attackZones[colliderNumber].size, 0);
-		foreach (Collider2D col in AttackZone)
+		Collider2D[] EnemyAttackZone = Physics2D.OverlapBoxAll(attackZones[colliderNumber].bounds.center, attackZones[colliderNumber].size, 0,enemy);
+		Collider2D[] BossAttackZone = Physics2D.OverlapBoxAll(attackZones[colliderNumber].bounds.center, attackZones[colliderNumber].size, 0,boss);
+        
+        foreach (Collider2D col in EnemyAttackZone)
 		{
 			EnemyMain enemy = col.GetComponent<EnemyMain>();
 			if (enemy)
@@ -194,6 +204,15 @@ public class PlayerSkill : MonoBehaviour
 				enemy.Hit();
 			}
 		}
+        foreach(Collider2D col in BossAttackZone)
+        {
+            BossController boss = col.GetComponent<BossController>();
+            if (boss)
+            {
+                boss.TakeHit();
+            }
+        }
+        
 	}
 
     private void AttackController()
@@ -228,10 +247,14 @@ public class PlayerSkill : MonoBehaviour
         canRolling = true;
         yield break;
     }
-    IEnumerator GetDamage()
+    IEnumerator Hit()
     {
         playerSP.color = new Color(1, 1, 1, 0.5f);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
+        playerSP.color = new Color(1, 1, 1, 1);
+        yield return new WaitForSeconds(0.1f);
+        playerSP.color = new Color(1, 1, 1, 0.5f);
+        yield return new WaitForSeconds(0.1f);
         playerSP.color = new Color(1, 1, 1, 1);
     }
 }
