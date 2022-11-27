@@ -13,6 +13,9 @@ public class BossController : MonoBehaviour
     [SerializeField] List<Collider2D> attack3Size;
     [SerializeField] float moveSpeed;
     [SerializeField] float attackCooldown;
+    [SerializeField] float IsAttackTime1;
+    [SerializeField] float IsAttackTime2;
+    [SerializeField] float IsAttackTime3;
     private float currentCoolTime;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigid;
@@ -22,6 +25,7 @@ public class BossController : MonoBehaviour
     public bool IsAttack;
     public bool death;
     public bool canHit;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -84,21 +88,21 @@ public class BossController : MonoBehaviour
         }
         if (attack1.Count > 0 && currentCoolTime > attackCooldown)
         {
-            StartCoroutine(CanHit(0.9f));
+            StartCoroutine(CanHit(IsAttackTime1));
             currentCoolTime = 0;
             animator.SetTrigger("Attack1");
             StartCoroutine(Attack(0.6f,player));
         }
         else if (attack2.Count > 0 && currentCoolTime > attackCooldown)
         {
-            StartCoroutine(CanHit(0.9f));
+            StartCoroutine(CanHit(IsAttackTime2));
             currentCoolTime = 0;
             animator.SetTrigger("Attack2");
             StartCoroutine(Attack(0.6f,player));
         }
         else if (attack3.Count > 0 && currentCoolTime > attackCooldown)
         {
-            StartCoroutine(CanHit(1.3f));
+            StartCoroutine(CanHit(IsAttackTime3));
             currentCoolTime = 0;
             animator.SetTrigger("Attack3");
             StartCoroutine(Attack(1f,player));
