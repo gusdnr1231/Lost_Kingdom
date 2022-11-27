@@ -38,7 +38,7 @@ public class PopEvent : MonoBehaviour
 
     public float duration = 0.2f;
 
-    private Sequence seq;
+    //private Sequence seq;
 
     private void Awake()
     {
@@ -84,7 +84,7 @@ public class PopEvent : MonoBehaviour
     //15 -15 85 -85 
     public void DoPopDown()
     {
-        seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
 
         seq.Append(upperBlock.DOLocalMoveY(15f, duration).SetEase(Ease.InCubic));
         seq.Join(underBlock.DOLocalMoveY(-15f, duration).SetEase(Ease.InCubic));
@@ -97,7 +97,7 @@ public class PopEvent : MonoBehaviour
 
     public void DoPopUp()
     {
-        seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
 
         optionPanel.SetActive(true);
         seq.Append(upperBlock.DOLocalMoveY(250f, duration).SetEase(Ease.InCubic));
@@ -110,7 +110,7 @@ public class PopEvent : MonoBehaviour
 
     public void DoOptionPopUp()
     {
-        seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
 
         seq.Append(upperBlock.DOLocalMoveY(15f, duration).SetEase(Ease.InCubic));
         seq.Join(underBlock.DOLocalMoveY(-15f, duration).SetEase(Ease.InCubic));
@@ -129,7 +129,7 @@ public class PopEvent : MonoBehaviour
 
     public void DoOptionPopDown()
     {
-        seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
 
         seq.Append(upperBlock.DOLocalMoveY(15f, duration).SetEase(Ease.InCubic));
         seq.Join(underBlock.DOLocalMoveY(-15f, duration).SetEase(Ease.InCubic));
@@ -156,7 +156,7 @@ public class PopEvent : MonoBehaviour
 
     public void PopUpTheNPCUI()
     {
-        seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
 
         npcPanel.SetActive(true);
         seq.Append(npcUpperBlock.DOLocalMoveY(255f, duration).SetEase(Ease.InCubic));
@@ -169,7 +169,7 @@ public class PopEvent : MonoBehaviour
 
     public void PopDownTheNPCUI()
     {
-        seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
 
         seq.Append(npcUpperBlock.DOLocalMoveY(50f, duration).SetEase(Ease.InCubic));
         seq.Join(npcUnderBlock.DOLocalMoveY(-50f, duration).SetEase(Ease.InCubic));
@@ -182,7 +182,7 @@ public class PopEvent : MonoBehaviour
 
     public void PopUpTheElementUI()
     {
-        seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
 
         elementPanel.SetActive(true);
         seq.Join(elementUI.DOScaleY(1, duration).SetEase(Ease.InCubic));
@@ -192,7 +192,7 @@ public class PopEvent : MonoBehaviour
     }
     public void PopDownTheElementUI()
     {
-        seq = DOTween.Sequence();
+        Sequence seq = DOTween.Sequence();
 
         elementPanel.SetActive(false);
         seq.Join(elementUI.DOScaleY(0, duration).SetEase(Ease.InCubic));

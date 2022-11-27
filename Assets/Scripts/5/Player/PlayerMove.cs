@@ -18,12 +18,18 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public bool isWallJumping { get; set; }
 
+    /*SoundManager bgm = new SoundManager();
+    AudioSource bgmSource;*/
+    public AudioClip bgmClip;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerDetect = GetComponent<PlayerDetect>();
         playerRigid = GetComponent<Rigidbody2D>();
         playerCurrentSpeed = playerSpeed;
+
+        SoundManager.instance.Bgm(bgmClip);
     }
     void Update()
     {
