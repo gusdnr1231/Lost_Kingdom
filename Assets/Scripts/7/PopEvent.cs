@@ -94,6 +94,7 @@ public class PopEvent : MonoBehaviour
             seq.Kill();
         });
     }
+
     public void DoPopUp()
     {
         seq = DOTween.Sequence();
