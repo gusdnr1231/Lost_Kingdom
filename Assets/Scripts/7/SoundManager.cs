@@ -1,31 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
-    private void Awake()
+    [SerializeField] private AudioMixer _masterMixer;
+    [SerializeField] private AudioSource _bgmSource;
+
+    //볼륨 조절
+    //효과음 재생
+    //배경음악 재생
+    private void Start()
     {
-        if(instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(instance);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        instance = this;
+    }
+    public void SetVolume(string mixer, float volume) // 0 ~ 1 //UI랑 연결해서 사용
+    {
+        _masterMixer.SetFloat(mixer, Mathf.Lerp(-40, 20, volume));
     }
 
-    public void SFXPlay(string sfxName, AudioClip clip)
+    public void PlayOneShot(AudioSource source, AudioClip clip)
     {
-        GameObject gameObject = new GameObject(sfxName + "Sound");
-        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.clip = clip;
-        audioSource.Play();
+        source.PlayOneShot(clip);
+    }
 
-        Destroy(gameObject, clip.length);
+    public void Bgm(AudioClip clip)
+    {
+        _bgmSource.clip = clip;
+        _bgmSource.Play();
     }
 }
+
+/*public class test : MonoBehaviour
+{
+    SoundManager sound = new SoundManager();
+
+    AudioSource source = null;
+    AudioClip clip = null;
+
+    private void Start()
+    {
+        sound.PlayOneShot(source, clip);
+    }
+}*/

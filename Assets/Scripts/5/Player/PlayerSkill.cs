@@ -31,6 +31,10 @@ public class PlayerSkill : MonoBehaviour
     public bool GetFire = false;
     public bool GetWater = false;
     public bool GetGround = false;
+
+    public AudioClip clip;
+    public AudioSource source;
+
     void Start()
     {
         playerElements = GetComponentInChildren<PlayerElements>();
@@ -176,6 +180,8 @@ public class PlayerSkill : MonoBehaviour
                 AttackEnemy(0);
                 StartCoroutine("AttackCooldown");
                 playerAnimator.SetTrigger("Attack1");
+
+                SoundManager.instance.PlayOneShot(source, clip);
             }
             else if (Input.GetKeyDown(KeyCode.Mouse0) && !attack2 && attack1 && canNextAttack)
             {
@@ -185,6 +191,8 @@ public class PlayerSkill : MonoBehaviour
                 attack2 = true;
                 playerAnimator.SetTrigger("Attack2");
                 Debug.Log("2");
+
+                SoundManager.instance.PlayOneShot(source, clip);
             }
             else if (Input.GetKeyDown(KeyCode.Mouse0) && attack2 && !attack3 && canNextAttack)
             {
@@ -194,6 +202,8 @@ public class PlayerSkill : MonoBehaviour
                 attack3 = true;
                 playerAnimator.SetTrigger("Attack3");
                 Debug.Log("3");
+
+                SoundManager.instance.PlayOneShot(source, clip);
             }
             else if (Input.GetKeyDown(KeyCode.Mouse0) && attack3 && !attack4 && canNextAttack)
             {
@@ -203,6 +213,8 @@ public class PlayerSkill : MonoBehaviour
                 attack4 = true;
                 playerAnimator.SetTrigger("Attack4");
                 Debug.Log("4");
+
+                SoundManager.instance.PlayOneShot(source, clip);
             }
         }
     }
