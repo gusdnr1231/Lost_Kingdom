@@ -10,7 +10,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]  float playerDashSpeed;
     [SerializeField]  float playerCurrentSpeed;
     [SerializeField] GameObject AttackZoneParent;
-
+    [SerializeField] float wallJumpX;
+    [SerializeField] float wallJumpY;
     public bool IsMove { get; set; }
     public float DirX { get; set; }
     public Rigidbody2D playerRigid { get; set; }
@@ -86,13 +87,13 @@ public class PlayerMove : MonoBehaviour
             {
                 spriteRenderer.flipX = false;
                 StartCoroutine("WallJumpingWaiter");
-                playerRigid.AddForce(new Vector2(5, 5), ForceMode2D.Impulse);
+                playerRigid.AddForce(new Vector2(wallJumpX, wallJumpY), ForceMode2D.Impulse);
             }
             else if (playerDetect.detectRight)
             {
                 spriteRenderer.flipX = true;
                 StartCoroutine("WallJumpingWaiter");
-                playerRigid.AddForce(new Vector2(-5, 5), ForceMode2D.Impulse);
+                playerRigid.AddForce(new Vector2(-wallJumpX, wallJumpY), ForceMode2D.Impulse);
             }
         }
     }
