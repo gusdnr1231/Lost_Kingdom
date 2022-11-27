@@ -7,6 +7,7 @@ public class PlayerSkill : MonoBehaviour
 {
     [SerializeField] GameObject golemAttackPrefab;
     [SerializeField] GameObject windEffectPrefab;
+    [SerializeField] GameObject fireAttackPrefab;
     [SerializeField] Transform windEffectTransform;
     [SerializeField] Transform golemAttackTransform;
     [SerializeField] BoxCollider2D[] attackZones;
@@ -41,40 +42,41 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-            PlayerGolemAttack();
-            PlayerAirAnimation();
-            PlayerWindJump();
-            PlayerAttack();
-            PlayerRolling();
-            if (playerDetect.IsGround)
+        PlayerGolemAttack();
+        PlayerAirAnimation();
+        PlayerWindJump();
+        PlayerAttack();
+        PlayerRolling();
+        PlayerFireAttack();
+        if (playerDetect.IsGround)
+        {
+            playerAnimator.SetBool("Air", false);
+        }
+        if (playerDetect.IsAir)
+        {
+            playerAnimator.SetBool("Run", false);
+        }
+        else
+        {
+            playerAnimator.SetBool("Jump", false);
+            if (playerMove.DirX == 1 || playerMove.DirX == -1)
             {
-                playerAnimator.SetBool("Air", false);
+                playerAnimator.SetBool("Run", true);
             }
-            if (playerDetect.IsAir)
-            {
-                playerAnimator.SetBool("Run", false);
-            }
-            else
-            {
-                playerAnimator.SetBool("Jump", false);
-                if (playerMove.DirX == 1 || playerMove.DirX == -1)
-                {
-                    playerAnimator.SetBool("Run", true);
-                }
 
-            }
-            if (playerMove.DirX == 1 && !playerMove.isWallJumping)
-            {
-                playerSP.flipX = false;
-            }
-            else if (playerMove.DirX == -1 && !playerMove.isWallJumping)
-            {
-                playerSP.flipX = true;
-            }
-            else
-            {
-                playerAnimator.SetBool("Run", false);
-            }
+        }
+        if (playerMove.DirX == 1 && !playerMove.isWallJumping)
+        {
+            playerSP.flipX = false;
+        }
+        else if (playerMove.DirX == -1 && !playerMove.isWallJumping)
+        {
+            playerSP.flipX = true;
+        }
+        else
+        {
+            playerAnimator.SetBool("Run", false);
+        }
     }
 
     public void PlayerGetDamage()
@@ -116,6 +118,20 @@ public class PlayerSkill : MonoBehaviour
             {
                 playerAnimator.SetBool("IsWall", false);
                 playerAnimator.SetBool("Air", true);
+            }
+        }
+    }
+    private void PlayerFireAttack()
+    {
+        if(Input.GetKeyDown(KeyCode.Mouse1) && playerElements.ElementFire)
+        {
+            if (playerSP.flipX)
+            {
+                Instantiate(fireAttackPrefab, new Vector2(transform.position.x-2,transform.position.y), Quaternion.Euler(0f, 180f, 0));
+            }
+            else
+            {
+                Instantiate(fireAttackPrefab, new Vector2(transform.position.x +2, transform.position.y), Quaternion.identity);
             }
         }
     }
