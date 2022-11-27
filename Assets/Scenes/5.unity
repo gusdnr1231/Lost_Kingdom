@@ -985,13 +985,13 @@ MonoBehaviour:
   - {fileID: 1862381392}
   moveSpeed: 0.2
   attackCooldown: 4
-  IsAttackTime1: 0
-  IsAttackTime2: 0
-  IsAttackTime3: 0
+  IsAttackTime1: 1
+  IsAttackTime2: 1
+  IsAttackTime3: 1.8
   canAttack: 0
   IsAttack: 0
   death: 0
-  canHit: 0
+  canHit: 1
 --- !u!1 &1360128734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,7 +1305,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.3724308, y: -0.9669399}
+  m_Offset: {x: 1.121521, y: -0.9669399}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1316,7 +1316,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.164486, y: 2.143692}
+  m_Size: {x: 2.6663055, y: 2.143692}
   m_EdgeRadius: 0
 --- !u!1 &1945888688
 GameObject:
