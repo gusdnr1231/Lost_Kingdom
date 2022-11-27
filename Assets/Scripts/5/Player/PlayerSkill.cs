@@ -29,6 +29,7 @@ public class PlayerSkill : MonoBehaviour
     public bool GetWater = false;
     public bool GetGround = false;
 
+
     void Start()
     {
         playerElements = GetComponentInChildren<PlayerElements>();
