@@ -14,12 +14,6 @@ public class EnemyMain : MonoBehaviour
 	public int AttackDelay, DelayTemp;
 	public Vector2 AttackSize;
 
-	[Header("재화 드롭 변수")]
-	public int MinMoney;
-	public int MaxMoney;
-	public bool IsFixed;
-	public int FixdeMoney;
-
 	[Header("적 컴포넌트")]
 	Rigidbody2D EnemyRigidbody;
 	Collider2D EnemyCollider;
@@ -63,9 +57,11 @@ public class EnemyMain : MonoBehaviour
 		EnemyAnima.SetFloat("Move", enemyMoving);
 		this.EnemyRigidbody.velocity = new Vector2(move * Speed, EnemyRigidbody.velocity.y);
 		Vector2 frontVector = new Vector2(EnemyRigidbody.position.x + move * 0.5f, EnemyRigidbody.position.y);
-		RaycastHit2D Ground = Physics2D.Raycast(frontVector, Vector3.down, 1, LayerMask.GetMask("Ground"));
+		RaycastHit2D Ground = Physics2D.Raycast(frontVector, Vector3.down, 5, LayerMask.GetMask("Ground"));
 		Debug.DrawRay(frontVector, Vector3.down, Color.red);
-		RaycastHit2D Wall = Physics2D.Raycast(EnemyCollider.bounds.center, new Vector2(nextMove, 0), 0.6f, LayerMask.GetMask("Ground"));
+		Debug.Log($"땅 감지 :{(bool)Ground}");
+		RaycastHit2D Wall = Physics2D.Raycast(EnemyCollider.bounds.center, new Vector2(nextMove, 0), 2f, LayerMask.GetMask("Ground"));
+		Debug.Log($"벽 감지 :{(bool)Wall}");
 		Debug.DrawRay(EnemyCollider.bounds.center, new Vector2(nextMove, 0), Color.blue);
 		if (Ground.collider == null || Wall.collider != null)
 		{
@@ -93,32 +89,30 @@ public class EnemyMain : MonoBehaviour
 	{
 		Vector2 searchVec = new Vector2(lastMove, 0);
 		RaycastHit2D search = Physics2D.Raycast(EnemyCollider.bounds.center, searchVec, RayDistance, LayerMask.GetMask("Player"));
-		if (isDead == false)
+		Debug.Log($"플레이어 감지 : {(bool)search}");
+		if (search.collider != null)
 		{
-			if (search.collider != null)
+			EnemyRenderer.flipX = lastMove == -1;
+			nextMove = lastMove;
+			enemyMoving = 0;
+			Moving(0);
+			Debug.Log("플레이어 감지");
+			if (AttackDelay == 0)
 			{
-				EnemyRenderer.flipX = lastMove == -1;
-				nextMove = lastMove;
-				enemyMoving = 0;
-				Moving(0);
-				Debug.Log("플레이어 감지");
-				if (AttackDelay == 0)
-				{
-					Attack();
-					EnemyAnima.SetTrigger("Attack");
-					AttackDelay = DelayTemp;
-				}
+				Attack();
+				EnemyAnima.SetTrigger("Attack");
+				AttackDelay = DelayTemp;
 			}
-			else if (search.collider == null)
+		}
+		else if (search.collider == null)
+		{
+			if (nextMove != 0)
 			{
-				if (nextMove != 0)
-				{
-					enemyMoving = 1;
-					lastMove = nextMove;
-				}
-				else if (nextMove == 0) enemyMoving = 0;
-				Moving(nextMove);
+				enemyMoving = 1;
+				lastMove = nextMove;
 			}
+			else if (nextMove == 0) enemyMoving = 0;
+			Moving(nextMove);
 		}
 	}
 
@@ -148,7 +142,6 @@ public class EnemyMain : MonoBehaviour
 
 	public void Hit() //데미지 입기
 	{
-		Debug.Log("적: 아야");
 		if (CurHealthPoint > 0)
 		{
 			CurHealthPoint--;
@@ -164,21 +157,4 @@ public class EnemyMain : MonoBehaviour
 	}
 
 	#endregion
-
-
-	/*void DropMoney()
-	{
-		if (CurHealthPoint <= 0)
-		{
-			if (IsFixed)
-			{
-				//플레이어의 현재 재화에 FIxedMoney의 값을 더한다.
-			}
-			else if (!IsFixed)
-			{
-				int Money = Random.Range(MinMoney, MaxMoney);
-				//플레이어의 현재 재화에 Money의 값을 더한다.
-			}
-		}
-	}*/
 }

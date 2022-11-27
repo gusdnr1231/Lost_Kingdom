@@ -101,15 +101,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealthPoint: 3
   Speed: 3
-  RayDistance: 0.6
+  RayDistance: 1
   AttackPoint: 0
   AttackDelay: 3
   DelayTemp: 3
-  AttackSize: {x: 2, y: 1}
-  MinMoney: 0
-  MaxMoney: 0
-  IsFixed: 0
-  FixdeMoney: 0
+  AttackSize: {x: 3, y: 1}
 --- !u!50 &5479283461047564016
 Rigidbody2D:
   serializedVersion: 4
@@ -167,12 +163,12 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3333334, y: 0.7916667}
+    oldSize: {x: 4, y: 2.375}
     newSize: {x: 1.5, y: 1.1875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.8}
+  m_Size: {x: 1.6175251, y: 2.4210038}
   m_EdgeRadius: 0
