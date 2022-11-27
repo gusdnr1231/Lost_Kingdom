@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Melee
       objectReference: {fileID: 0}
+    - target: {fileID: 5479283461047564028, guid: 2d5d18aee841cb140a47ff7339b6acff, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5479283461047564030, guid: 2d5d18aee841cb140a47ff7339b6acff, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -415,7 +419,7 @@ MonoBehaviour:
   m_Follow: {fileID: 192751061}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 7
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -458,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d63943ce4e1462e4b9de5441b7193534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShakeAmount: 0.7
+  ShakeAmount: 1
   movingCamera: {fileID: 298967234}
 --- !u!1 &302312659
 GameObject:
@@ -712,7 +716,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1388,6 +1392,10 @@ PrefabInstance:
     - target: {fileID: 8473956796266689877, guid: cd76656107426bb49b91839ee1752f68, type: 3}
       propertyPath: m_Name
       value: Enemy_Archer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8473956796266689877, guid: cd76656107426bb49b91839ee1752f68, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd76656107426bb49b91839ee1752f68, type: 3}

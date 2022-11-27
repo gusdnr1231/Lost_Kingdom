@@ -9,7 +9,6 @@ public class CameraShakeEffect : MonoBehaviour
 	float ShakeTime;
 	CinemachineFramingTransposer virtualFramingTransposer;
 	[SerializeField] GameObject movingCamera;
-	Vector3 initialPosition;
 	
 	void Start()
 	{
@@ -23,17 +22,15 @@ public class CameraShakeEffect : MonoBehaviour
 
 	private void Update()
 	{
-		initialPosition = virtualFramingTransposer.m_TrackedObjectOffset;
-		/*Debug.Log(initialPosition);*/
 		if (ShakeTime > 0)
 		{
-			virtualFramingTransposer.m_TrackedObjectOffset = Random.insideUnitSphere * ShakeAmount + initialPosition;
+			virtualFramingTransposer.m_TrackedObjectOffset = new Vector3(Random.Range(-1f,1.1f) * ShakeAmount, Random.Range(-1f, 1.1f) * ShakeAmount,0);
 			ShakeTime -= Time.deltaTime;
 		}
 		else
 		{
 			ShakeTime = 0.0f;
-			virtualFramingTransposer.m_TrackedObjectOffset = Vector3.zero;//initialPosition;
+			virtualFramingTransposer.m_TrackedObjectOffset = Vector3.zero;
 		}
 	}
 	
