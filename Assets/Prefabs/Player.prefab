@@ -676,7 +676,6 @@ MonoBehaviour:
   fireAttackPrefab: {fileID: 0}
   windEffectTransform: {fileID: 5915570517148058964}
   golemAttackTransform: {fileID: 1237892076564994184}
-  fireAttackTransform: {fileID: 0}
   attackZones:
   - {fileID: 2946153486024418909}
   - {fileID: 6595971139480259913}
@@ -901,7 +900,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5915570517852188574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.029, y: -1.38, z: 0}
+  m_LocalPosition: {x: 0.029, y: -1.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5915570517077473425}
