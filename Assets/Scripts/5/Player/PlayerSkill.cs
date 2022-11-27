@@ -31,7 +31,13 @@ public class PlayerSkill : MonoBehaviour
     public bool GetFire = false;
     public bool GetWater = false;
     public bool GetGround = false;
-
+    public float MaxHp;
+    public float CurrentHp;
+    public float MaxMp;
+    public float CurrentMp;
+    public float FireCost;
+    public float WindCost;
+    public float GroundCost;
     public AudioClip clip;
     public AudioSource source;
 
@@ -46,6 +52,10 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
+        if(CurrentMp < MaxMp)
+        {
+            CurrentMp += Time.deltaTime * 2;
+        }
         PlayerGolemAttack();
         PlayerAirAnimation();
         PlayerWindJump();
@@ -127,8 +137,9 @@ public class PlayerSkill : MonoBehaviour
     }
     private void PlayerFireAttack()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse1) && playerElements.ElementFire)
+        if(Input.GetKeyDown(KeyCode.Mouse1) && playerElements.ElementFire && CurrentMp >= FireCost)
         {
+            CurrentMp -= FireCost;
             if (playerSP.flipX)
             {
                 Instantiate(fireAttackPrefab, new Vector2(transform.position.x-2,transform.position.y), Quaternion.Euler(0f, 180f, 0));
@@ -141,8 +152,9 @@ public class PlayerSkill : MonoBehaviour
     }
     private void PlayerGolemAttack()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse1) && playerElements.ElementGround)
+        if(Input.GetKeyDown(KeyCode.Mouse1) && playerElements.ElementGround && CurrentMp >= GroundCost)
         {
+            CurrentMp -= GroundCost;
             if (playerSP.flipX)
             {
                 Instantiate(golemAttackPrefab, golemAttackTransform.position ,Quaternion.Euler(0f,180f,0));
@@ -156,8 +168,9 @@ public class PlayerSkill : MonoBehaviour
     private void PlayerWindJump()
     {
 
-        if (Input.GetKeyDown(KeyCode.Mouse1) && playerDetect.IsAir && playerElements.ElementWind && canWindJump && !playerDetect.IsGroundWall)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && playerDetect.IsAir && playerElements.ElementWind && canWindJump && !playerDetect.IsGroundWall && CurrentMp > WindCost)
         {
+            CurrentMp -= WindCost;
             playerMove.WindJump();
             Instantiate(windEffectPrefab,windEffectTransform);
         }
