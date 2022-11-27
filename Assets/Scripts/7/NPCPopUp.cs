@@ -20,7 +20,7 @@ public class NPCPopUp : MonoBehaviour
     {
         Collider2D[] cols = Physics2D.OverlapBoxAll(boxCol2d.bounds.center, boxCol2d.bounds.size, 0f, playerLayer);
 
-        if(cols.Length > 0 && Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.R))
         {
             popEvent.npcText.text = text.text;
             popEvent.PopUpTheNPCUI();

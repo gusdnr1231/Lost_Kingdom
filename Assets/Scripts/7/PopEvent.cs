@@ -38,7 +38,7 @@ public class PopEvent : MonoBehaviour
 
     public float duration = 0.2f;
 
-    //private Sequence seq;
+    //private Sequence sequence;
 
     private void Awake()
     {
@@ -47,7 +47,7 @@ public class PopEvent : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
@@ -67,18 +67,6 @@ public class PopEvent : MonoBehaviour
             OffInventoryPanel();
             isPopUpTheInventoryPanel = false;
         }
-
-        /*if (!lif && Input.GetKeyDown(KeyCode.R))
-        {
-            PopUpTheNPCUI();
-            lif = true;
-        }
-        else if(lif && Input.GetKeyDown(KeyCode.R))
-        {
-            PopDownTheNPCUI();
-            lif = false;
-        }*/
-        
     }
 
     //15 -15 85 -85 
