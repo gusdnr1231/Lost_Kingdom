@@ -121,11 +121,6 @@ public class PlayerSkill : MonoBehaviour
             }
         }
     }
-    private void PlayerWaterControl()
-    {
-        float wheelInput = Input.GetAxis("Mouse ScrollWheel");
-        
-    }
     private void PlayerFireAttack()
     {
         if(Input.GetKeyDown(KeyCode.Mouse1) && playerElements.ElementFire)

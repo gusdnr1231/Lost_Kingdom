@@ -16,7 +16,7 @@ public class PlayerDetect : MonoBehaviour
     public bool detectLeft { get; set; }
     public bool detectRight { get; set; }
     public bool IsGroundWall { get; set; }
-    private bool detectUp;
+    public bool detectUp { get; set; }
     void Start()
     {
         playerBoxCol = GetComponent<BoxCollider2D>();
