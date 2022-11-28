@@ -12,6 +12,7 @@ public class CameraShakeEffect : MonoBehaviour
 	
 	void Start()
 	{
+		DontDestroyOnLoad(movingCamera);
 		virtualFramingTransposer = movingCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
 	}
 

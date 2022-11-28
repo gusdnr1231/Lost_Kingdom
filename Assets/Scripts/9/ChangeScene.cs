@@ -13,7 +13,8 @@ public class ChangeScene : MonoBehaviour
 
     void Awake()
     {
-        if(splash == null) splash = FindObjectOfType<SplashControl>();
+		
+		if (splash == null) splash = FindObjectOfType<SplashControl>();
         if(thePlayer == null) thePlayer = FindObjectOfType<Player>();
     }
 
@@ -21,7 +22,7 @@ public class ChangeScene : MonoBehaviour
     {
         if(col.CompareTag("Player"))
         {
-            splash.StartCoroutine("SceneChangeOn");
+			splash.StartCoroutine("SceneChangeOn");
             thePlayer.currentSceneName = transferScene;
             SceneManager.LoadScene(transferScene);
         }
