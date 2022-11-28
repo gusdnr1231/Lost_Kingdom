@@ -20,6 +20,11 @@ public class EnemyMain : MonoBehaviour
 	SpriteRenderer EnemyRenderer;
 	Animator EnemyAnima;
 
+	[Header("받아오기")]
+	[SerializeField] GameObject CameraManager;
+	CameraShakeEffect cameraShaker;
+	[SerializeField] GameObject HitEffect;
+
 	int lastMove = 1;
 	int nextMove;
 	float enemyMoving;
@@ -31,6 +36,7 @@ public class EnemyMain : MonoBehaviour
 		EnemyCollider = this.GetComponent<BoxCollider2D>();
 		EnemyRenderer = this.GetComponent<SpriteRenderer>();
 		EnemyAnima = this.GetComponent<Animator>();
+		cameraShaker = CameraManager.GetComponent<CameraShakeEffect>();
 		EnemyAnima.SetFloat("Move", enemyMoving);
 		CurHealthPoint = MaxHealthPoint;
 		Invoke("Think", 3);
@@ -135,15 +141,18 @@ public class EnemyMain : MonoBehaviour
 			PlayerSkill player = col.GetComponent<PlayerSkill>();
 			if (player)
 			{
-				player.PlayerGetDamage();
+				player.PlayerGetDamage(lastMove);
 			}
 		}
 	}
 
-	public void Hit() //데미지 입기
+	public void Hit(float AttackPos) //데미지 입기
 	{
+		if (AttackPos == 1) Instantiate(HitEffect, transform.position, Quaternion.Euler(0, 0, 0));
+		else if (AttackPos == -1) Instantiate(HitEffect, transform.position, Quaternion.Euler(0, 180, 0));
 		if (CurHealthPoint > 0)
 		{
+			cameraShaker.VibrateForTime(0.5f);
 			CurHealthPoint--;
 			EnemyAnima.SetTrigger("Hit");
 		}

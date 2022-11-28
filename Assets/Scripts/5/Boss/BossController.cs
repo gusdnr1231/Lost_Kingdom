@@ -16,9 +16,10 @@ public class BossController : MonoBehaviour
     [SerializeField] float IsAttackTime1;
     [SerializeField] float IsAttackTime2;
     [SerializeField] float IsAttackTime3;
-    private float currentCoolTime;
+	private float currentCoolTime;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigid;
+	private BoxCollider2D collider;
     private Animator animator;
     private Vector2 moveDir;
     public bool canAttack;
@@ -28,8 +29,9 @@ public class BossController : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+		animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void Update()
@@ -142,11 +144,12 @@ public class BossController : MonoBehaviour
         if (canHit)
         {
             bossHp -= 1;
-            animator.SetTrigger("TakeHit");
+			animator.SetTrigger("TakeHit");
         }
         if(bossHp == 0)
         {
             death = true;
+            Destroy(collider);
         }
     }
     IEnumerator CanHit(float time)
@@ -158,7 +161,7 @@ public class BossController : MonoBehaviour
     IEnumerator Attack(float time,PlayerSkill player)
     {
         yield return new WaitForSeconds(0.8f);
-        player.PlayerGetDamage();
+        player.PlayerGetDamage((int)moveDir.x);
         yield return new WaitForSeconds(time);
         IsAttack = false;
     }

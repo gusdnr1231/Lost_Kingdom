@@ -172,3 +172,4 @@ MonoBehaviour:
   AttackDelay: 5
   DelayTemp: 4
   AttackSize: {x: 15, y: 1}
+  CameraManager: {fileID: 0}
