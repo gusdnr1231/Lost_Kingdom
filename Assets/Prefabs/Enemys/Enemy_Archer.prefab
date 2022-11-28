@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8473956796266689879}
   - component: {fileID: 8473956796266689876}
   - component: {fileID: 8473956796266689875}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemy_Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,3 +172,4 @@ MonoBehaviour:
   AttackDelay: 5
   DelayTemp: 4
   AttackSize: {x: 15, y: 1}
+  CameraManager: {fileID: 0}

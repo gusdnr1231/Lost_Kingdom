@@ -17,6 +17,8 @@ public class PlayerMove : MonoBehaviour
     private PlayerDetect playerDetect;
     private SpriteRenderer spriteRenderer;
     public bool isWallJumping { get; set; }
+    float h;
+    public float lasth;
 
     void Start()
     {
@@ -27,6 +29,7 @@ public class PlayerMove : MonoBehaviour
     }
     void Update()
     {
+        if(h != 0) lasth = h; 
         if (playerDetect.IsWall && playerRigid.velocity.y > 0 && !isWallJumping)
         {
             playerRigid.velocity = new Vector2(playerRigid.velocity.x, 0);
@@ -41,7 +44,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void Move()
     {
-        float h = Input.GetAxisRaw("Horizontal");
+        h = Input.GetAxisRaw("Horizontal");
         DirX = h;
         //playerRigid.velocity = new Vector2(h * playerCurrentSpeed, playerRigid.velocity.y);
         if (!playerDetect.detectLeft && h == -1)

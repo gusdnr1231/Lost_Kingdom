@@ -18,6 +18,7 @@ public class CameraShakeEffect : MonoBehaviour
 	public void VibrateForTime(float time)
 	{
 		ShakeTime = time;
+		StartCoroutine(TimeStop());
 	}
 
 	private void Update()
@@ -34,5 +35,11 @@ public class CameraShakeEffect : MonoBehaviour
 		}
 	}
 	
-
+	IEnumerator TimeStop()
+	{
+		Debug.Log("Ω√∞£ ∏ÿ√„");
+		Time.timeScale = 0;
+		yield return new WaitForSecondsRealtime(0.1f);
+		Time.timeScale = 1;
+	}
 }

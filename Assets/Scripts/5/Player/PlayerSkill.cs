@@ -13,7 +13,11 @@ public class PlayerSkill : MonoBehaviour
     [SerializeField] BoxCollider2D[] attackZones;
     [SerializeField] LayerMask enemy;
     [SerializeField] LayerMask boss;
-    private PlayerDetect playerDetect;
+	[SerializeField] GameObject CameraManager;
+	[SerializeField] GameObject[] HitEffect;
+	CameraShakeEffect cameraShaker;
+	private BoxCollider2D collider;
+	private PlayerDetect playerDetect;
     private PlayerElements playerElements;
     private SpriteRenderer playerSP;
     private PlayerMove playerMove;
@@ -38,6 +42,7 @@ public class PlayerSkill : MonoBehaviour
         playerSP = GetComponent<SpriteRenderer>();
         playerMove = GetComponent<PlayerMove>();
         playerAnimator = GetComponent<Animator>();
+        cameraShaker = CameraManager.GetComponent<CameraShakeEffect>();
     }
 
     void Update()
@@ -79,16 +84,21 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-    public void PlayerGetDamage()
+    public void PlayerGetDamage(int EnemyAttackPos)
     {
         if (!isRolling)
         {
-            Debug.Log("아야");
+			if (EnemyAttackPos == 1) Instantiate(HitEffect[0], transform.position, Quaternion.Euler(0, 0, 0));
+			else if (EnemyAttackPos == -1) Instantiate(HitEffect[0], transform.position, Quaternion.Euler(0, 180, 0));
+			Debug.Log("아야");
             StartCoroutine("Hit");
+			cameraShaker.VibrateForTime(0.5f);
         }
         else
         {
-            Debug.Log("느려");
+			if (EnemyAttackPos == 1) Instantiate(HitEffect[1], transform.position, Quaternion.Euler(0, 0, 0));
+			else if (EnemyAttackPos == -1) Instantiate(HitEffect[1], transform.position, Quaternion.Euler(0, 180, 0));
+			Debug.Log("느려");
         }
     }
     private void PlayerAirAnimation()
@@ -222,7 +232,7 @@ public class PlayerSkill : MonoBehaviour
 			EnemyMain enemy = col.GetComponent<EnemyMain>();
 			if (enemy)
 			{
-				enemy.Hit();
+				enemy.Hit(playerMove.lasth);
 			}
 		}
         foreach(Collider2D col in BossAttackZone)
