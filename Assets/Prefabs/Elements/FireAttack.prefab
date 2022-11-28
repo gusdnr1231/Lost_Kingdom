@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8437854353021149736}
   - component: {fileID: 8437854353021149739}
   - component: {fileID: 8437854353021149734}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: FireAttack
-  m_TagString: Untagged
+  m_TagString: FireAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

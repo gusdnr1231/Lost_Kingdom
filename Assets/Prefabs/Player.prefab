@@ -6771,8 +6771,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fbd68168c45f14b82a3ca92059d41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 3
-  jumpPower: 6
+  playerSpeed: 6
+  jumpPower: 8
   windJumpPower: 5
   playerDashSpeed: 15
   playerCurrentSpeed: 0
@@ -6795,7 +6795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   golemAttackPrefab: {fileID: 5718185703424105019, guid: 0a5fa96aaa56f1d468d6d99b58038376, type: 3}
   windEffectPrefab: {fileID: 1663006999141319597, guid: c988b41d23c93444694a450017d38887, type: 3}
-  fireAttackPrefab: {fileID: 0}
+  fireAttackPrefab: {fileID: 8437854353021149738, guid: 73e2fa7bd492da145b9105297ba8d2cd, type: 3}
   windEffectTransform: {fileID: 5915570517148058964}
   golemAttackTransform: {fileID: 1237892076564994184}
   attackZones:
@@ -6805,12 +6805,14 @@ MonoBehaviour:
   - {fileID: 7025610868380990203}
   enemy:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   boss:
     serializedVersion: 2
     m_Bits: 8192
   CameraManager: {fileID: 0}
-  HitEffect: []
+  HitEffect:
+  - {fileID: 9059653904717588288, guid: 3c237157074acc94db177d362ded9598, type: 3}
+  - {fileID: 9017213835885914877, guid: 30b8c89e6b70a3f42afb475d000f5464, type: 3}
   canWindJump: 1
   GetWind: 1
   GetFire: 1

@@ -7,12 +7,22 @@ public class FadeInOut : MonoBehaviour
     [SerializeField] Image image;
     void Start()
     {
-        StartCoroutine("Fade");
+        StartCoroutine("FadeIn");
     }
 
     void Update()
     {
         
+    }
+    IEnumerator FadeIn()
+    {
+        float fadein = 1;
+        while(fadein >= 0)
+        {
+            fadein -= 0.005f;
+            yield return new WaitForSeconds(0.01f);
+            image.color = new Color(0, 0, 0, fadein);
+        }
     }
     IEnumerator Fade()
     {
