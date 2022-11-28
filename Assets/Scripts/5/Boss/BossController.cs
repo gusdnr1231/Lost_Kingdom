@@ -31,6 +31,11 @@ public class BossController : MonoBehaviour
     public bool death;
     public bool canHit;
 
+    [SerializeField] AudioSource bossSource;
+    [SerializeField] AudioClip bossAttack1Clip;
+    [SerializeField] AudioClip bossAttack2Clip;
+    [SerializeField] AudioClip bossAttack3Clip;
+
     void Start()
     {
 		animator = GetComponent<Animator>();
@@ -98,6 +103,8 @@ public class BossController : MonoBehaviour
             currentCoolTime = 0;
             animator.SetTrigger("Attack1");
             StartCoroutine(Attack(0.6f,player,AttackDelay1));
+
+            SoundManager.instance.PlayOneShot(bossSource, bossAttack1Clip);
         }
         else if (attack2.Count > 0 && currentCoolTime > attackCooldown)
         {
@@ -105,6 +112,8 @@ public class BossController : MonoBehaviour
             currentCoolTime = 0;
             animator.SetTrigger("Attack2");
             StartCoroutine(Attack(0.6f,player,AttackDelay2));
+
+            SoundManager.instance.PlayOneShot(bossSource, bossAttack2Clip);
         }
         else if (attack3.Count > 0 && currentCoolTime > attackCooldown)
         {
@@ -112,6 +121,8 @@ public class BossController : MonoBehaviour
             currentCoolTime = 0;
             animator.SetTrigger("Attack3");
             StartCoroutine(Attack(1f,player,AttackDelay3));
+
+            SoundManager.instance.PlayOneShot(bossSource, bossAttack3Clip);
         }
         if (detect.Length > 0)
         {
