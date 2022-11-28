@@ -20,6 +20,7 @@ public class ChangeScene : MonoBehaviour
     {
         if(col.CompareTag("Player"))
         {
+                
             thePlayer.transform.position = ChangeTrans.position;
         }
     }
