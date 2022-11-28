@@ -1285,7 +1285,8 @@ PrefabInstance:
       propertyPath: HitEffect.Array.size
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2005438845, guid: 1a0196985d95bc7488f2e4b5c627b016, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a0196985d95bc7488f2e4b5c627b016, type: 3}
 --- !u!4 &1821676828 stripped
 Transform:
@@ -1479,9 +1480,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Theme_1
       objectReference: {fileID: 0}
-    - target: {fileID: 8845938918034348783, guid: 763e2d60e495cd042b15e479cb7715c9, type: 3}
-      propertyPath: HitEffect
-      value: 
-      objectReference: {fileID: 1722853914192935075, guid: 69c3edb63dced0943912ecf4679775a3, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 763e2d60e495cd042b15e479cb7715c9, type: 3}
