@@ -145,7 +145,7 @@ public class PopEvent : MonoBehaviour
     public void PopUpTheNPCUI()
     {
         Sequence seq = DOTween.Sequence();
-
+        Debug.Log("PopUpTheNPCUI ½ÇÇàµÊ");
         npcPanel.SetActive(true);
         seq.Append(npcUpperBlock.DOLocalMoveY(255f, duration).SetEase(Ease.InCubic));
         seq.Join(npcUnderBlock.DOLocalMoveY(-220f, duration).SetEase(Ease.InCubic));
@@ -158,7 +158,7 @@ public class PopEvent : MonoBehaviour
     public void PopDownTheNPCUI()
     {
         Sequence seq = DOTween.Sequence();
-
+        Debug.Log("PopDownTheNPCUI ½ÇÇàµÊ");
         seq.Append(npcUpperBlock.DOLocalMoveY(50f, duration).SetEase(Ease.InCubic));
         seq.Join(npcUnderBlock.DOLocalMoveY(-50f, duration).SetEase(Ease.InCubic));
         seq.Join(rectNPCPanel.DOScaleY(0, duration).SetEase(Ease.InCubic));

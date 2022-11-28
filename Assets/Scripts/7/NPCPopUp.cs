@@ -11,6 +11,8 @@ public class NPCPopUp : MonoBehaviour
     public LayerMask playerLayer;
     [SerializeField] TextMeshProUGUI text;
 
+    public bool playerCheck = false;
+
     private void Start()
     {
         popEvent = FindObjectOfType<PopEvent>();
@@ -20,12 +22,12 @@ public class NPCPopUp : MonoBehaviour
     {
         Collider2D[] cols = Physics2D.OverlapBoxAll(boxCol2d.bounds.center, boxCol2d.bounds.size, 0f, playerLayer);
 
-        if(Input.GetKeyDown(KeyCode.R))
+        if(cols.Length > 0 && Input.GetKeyDown(KeyCode.R))
         {
             popEvent.npcText.text = text.text;
             popEvent.PopUpTheNPCUI();
         }
-        else if(cols.Length == 0)
+        else if(Input.GetKeyDown(KeyCode.F))
         {
             popEvent.PopDownTheNPCUI();
         }
