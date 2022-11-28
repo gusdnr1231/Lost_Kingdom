@@ -252,7 +252,7 @@ public class PlayerSkill : MonoBehaviour
 			EnemyMain enemy = col.GetComponent<EnemyMain>();
 			if (enemy)
 			{
-				enemy.Hit(playerMove.lasth);
+				enemy.Hit(playerMove.LastH);
 			}
 		}
         foreach(Collider2D col in BossAttackZone)
@@ -260,7 +260,7 @@ public class PlayerSkill : MonoBehaviour
             BossController boss = col.GetComponent<BossController>();
             if (boss)
             {
-                boss.TakeHit(playerMove.lasth);
+                boss.TakeHit(playerMove.LastH);
             }
         }
         

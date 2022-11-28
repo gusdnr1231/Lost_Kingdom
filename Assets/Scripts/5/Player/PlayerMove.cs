@@ -18,6 +18,8 @@ public class PlayerMove : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public bool isWallJumping { get; set; }
 
+    public float LastH;
+
     /*SoundManager bgm = new SoundManager();
     AudioSource bgmSource;*/
     public AudioClip bgmClip;
@@ -51,6 +53,10 @@ public class PlayerMove : MonoBehaviour
     {
 
         float h = Input.GetAxisRaw("Horizontal");
+        if(h != 0)
+        {
+            LastH = h;
+        }
         if(h != 0 && playerSource.isPlaying == false) SoundManager.instance.PlayOneShot(playerSource , walkSound);
         DirX = h;
         //playerRigid.velocity = new Vector2(h * playerCurrentSpeed, playerRigid.velocity.y);
