@@ -16,6 +16,9 @@ public class BossController : MonoBehaviour
     [SerializeField] float IsAttackTime1;
     [SerializeField] float IsAttackTime2;
     [SerializeField] float IsAttackTime3;
+    [SerializeField] float AttackDelay1;
+    [SerializeField] float AttackDelay2;
+    [SerializeField] float AttackDelay3;
 	private float currentCoolTime;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigid;
@@ -93,21 +96,21 @@ public class BossController : MonoBehaviour
             StartCoroutine(CanHit(IsAttackTime1));
             currentCoolTime = 0;
             animator.SetTrigger("Attack1");
-            StartCoroutine(Attack(0.6f,player));
+            StartCoroutine(Attack(0.6f,player,AttackDelay1));
         }
         else if (attack2.Count > 0 && currentCoolTime > attackCooldown)
         {
             StartCoroutine(CanHit(IsAttackTime2));
             currentCoolTime = 0;
             animator.SetTrigger("Attack2");
-            StartCoroutine(Attack(0.6f,player));
+            StartCoroutine(Attack(0.6f,player,AttackDelay2));
         }
         else if (attack3.Count > 0 && currentCoolTime > attackCooldown)
         {
             StartCoroutine(CanHit(IsAttackTime3));
             currentCoolTime = 0;
             animator.SetTrigger("Attack3");
-            StartCoroutine(Attack(1f,player));
+            StartCoroutine(Attack(1f,player,AttackDelay3));
         }
         if (detect.Length > 0)
         {
@@ -158,9 +161,9 @@ public class BossController : MonoBehaviour
         yield return new WaitForSeconds(time);
         canHit = true;
     }
-    IEnumerator Attack(float time,PlayerSkill player)
+    IEnumerator Attack(float time,PlayerSkill player,float attackDelay)
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(attackDelay);
         player.PlayerGetDamage((int)moveDir.x);
         yield return new WaitForSeconds(time);
         IsAttack = false;
