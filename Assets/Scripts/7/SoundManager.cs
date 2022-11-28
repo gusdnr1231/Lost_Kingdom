@@ -13,7 +13,7 @@ public class SoundManager : MonoBehaviour
     //볼륨 조절
     //효과음 재생
     //배경음악 재생
-    private void Start()
+    private void Awake()
     {
         instance = this;
     }

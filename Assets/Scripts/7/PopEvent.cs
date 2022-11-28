@@ -38,7 +38,7 @@ public class PopEvent : MonoBehaviour
 
     public float duration = 0.2f;
 
-    //private Sequence seq;
+    //private Sequence sequence;
 
     private void Awake()
     {
@@ -47,7 +47,7 @@ public class PopEvent : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
@@ -67,18 +67,6 @@ public class PopEvent : MonoBehaviour
             OffInventoryPanel();
             isPopUpTheInventoryPanel = false;
         }
-
-        /*if (!lif && Input.GetKeyDown(KeyCode.R))
-        {
-            PopUpTheNPCUI();
-            lif = true;
-        }
-        else if(lif && Input.GetKeyDown(KeyCode.R))
-        {
-            PopDownTheNPCUI();
-            lif = false;
-        }*/
-        
     }
 
     //15 -15 85 -85 
@@ -157,7 +145,7 @@ public class PopEvent : MonoBehaviour
     public void PopUpTheNPCUI()
     {
         Sequence seq = DOTween.Sequence();
-
+        Debug.Log("PopUpTheNPCUI ½ÇÇàµÊ");
         npcPanel.SetActive(true);
         seq.Append(npcUpperBlock.DOLocalMoveY(255f, duration).SetEase(Ease.InCubic));
         seq.Join(npcUnderBlock.DOLocalMoveY(-220f, duration).SetEase(Ease.InCubic));
@@ -170,7 +158,7 @@ public class PopEvent : MonoBehaviour
     public void PopDownTheNPCUI()
     {
         Sequence seq = DOTween.Sequence();
-
+        Debug.Log("PopDownTheNPCUI ½ÇÇàµÊ");
         seq.Append(npcUpperBlock.DOLocalMoveY(50f, duration).SetEase(Ease.InCubic));
         seq.Join(npcUnderBlock.DOLocalMoveY(-50f, duration).SetEase(Ease.InCubic));
         seq.Join(rectNPCPanel.DOScaleY(0, duration).SetEase(Ease.InCubic));

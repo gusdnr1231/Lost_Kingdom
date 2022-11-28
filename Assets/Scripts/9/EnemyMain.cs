@@ -65,9 +65,9 @@ public class EnemyMain : MonoBehaviour
 		Vector2 frontVector = new Vector2(EnemyRigidbody.position.x + move * 0.5f, EnemyRigidbody.position.y);
 		RaycastHit2D Ground = Physics2D.Raycast(frontVector, Vector3.down, 5, LayerMask.GetMask("Ground"));
 		Debug.DrawRay(frontVector, Vector3.down, Color.red);
-		Debug.Log($"땅 감지 :{(bool)Ground}");
+		//Debug.Log($"땅 감지 :{(bool)Ground}");
 		RaycastHit2D Wall = Physics2D.Raycast(EnemyCollider.bounds.center, new Vector2(nextMove, 0), 2f, LayerMask.GetMask("Ground"));
-		Debug.Log($"벽 감지 :{(bool)Wall}");
+		//Debug.Log($"벽 감지 :{(bool)Wall}");
 		Debug.DrawRay(EnemyCollider.bounds.center, new Vector2(nextMove, 0), Color.blue);
 		if (Ground.collider == null || Wall.collider != null)
 		{
@@ -95,7 +95,7 @@ public class EnemyMain : MonoBehaviour
 	{
 		Vector2 searchVec = new Vector2(lastMove, 0);
 		RaycastHit2D search = Physics2D.Raycast(EnemyCollider.bounds.center, searchVec, RayDistance, LayerMask.GetMask("Player"));
-		Debug.Log($"플레이어 감지 : {(bool)search}");
+		//Debug.Log($"플레이어 감지 : {(bool)search}");
 		if (search.collider != null)
 		{
 			EnemyRenderer.flipX = lastMove == -1;
