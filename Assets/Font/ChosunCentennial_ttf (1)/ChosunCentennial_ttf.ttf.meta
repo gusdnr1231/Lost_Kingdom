@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0c4b7e421771d5e40853511f31e2d676
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Chosun Centennial
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 23c91c44f3fc6cd44b61dba3f685134c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
