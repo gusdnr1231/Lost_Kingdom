@@ -20,6 +20,13 @@ public class PopEvent : MonoBehaviour
     [Header("인벤토리")]
     public GameObject inventoryPanel;
     public bool isPopUpTheInventoryPanel = false;
+    public bool boss1Clear;
+    public bool boss2Clear;
+    public bool boss3Clear;
+    public GameObject boss1X;
+    public GameObject boss2X;
+    public GameObject boss3X;
+    public GameObject creditButton;
     [Header("NPC UI")]
     public RectTransform npcUpperBlock;
     public RectTransform npcUnderBlock;
@@ -30,9 +37,15 @@ public class PopEvent : MonoBehaviour
     public RectTransform elementUI;
     public TextMeshProUGUI elementText;
     public GameObject elementPanel;
+    [Header("엔딩 크레딧")]
+    public GameObject creditPanel;
+    public TextMeshProUGUI creditText1;
+    public float creditDuration = 5f;
+    public bool gameisEnd = false;
 
     bool lif;
 
+    
 
     SliderController sliderController;
 
@@ -66,6 +79,10 @@ public class PopEvent : MonoBehaviour
         {
             OffInventoryPanel();
             isPopUpTheInventoryPanel = false;
+        }
+        if (gameisEnd)
+        {
+            DownEndingCredit();
         }
     }
 
@@ -135,6 +152,24 @@ public class PopEvent : MonoBehaviour
     public void OnInventoryPanel()
     {
         inventoryPanel.SetActive(true);
+
+        if (boss1Clear)
+        {
+            boss1X.SetActive(true);
+        }
+        if (boss2Clear)
+        {
+            boss2X.SetActive(true);
+        }
+        if (boss3Clear)
+        {
+            boss3X.SetActive(true);
+        }
+
+        if(boss1Clear && boss2Clear && boss3Clear)
+        {
+            creditButton.SetActive(true);
+        }
     }
 
     public void OffInventoryPanel()
@@ -173,7 +208,7 @@ public class PopEvent : MonoBehaviour
         Sequence seq = DOTween.Sequence();
 
         elementPanel.SetActive(true);
-        seq.Join(elementUI.DOScaleY(1, duration).SetEase(Ease.InCubic));
+        seq.Append(elementUI.DOScaleY(1, duration).SetEase(Ease.InCubic));
         seq.AppendCallback(() => {
             seq.Kill();
         });
@@ -183,8 +218,34 @@ public class PopEvent : MonoBehaviour
         Sequence seq = DOTween.Sequence();
 
         elementPanel.SetActive(false);
-        seq.Join(elementUI.DOScaleY(0, duration).SetEase(Ease.InCubic));
+        seq.Append(elementUI.DOScaleY(0, duration).SetEase(Ease.InCubic));
         seq.AppendCallback(() => {
+            seq.Kill();
+        });
+    }
+
+    public void UpEndingCredit()
+    {
+        Sequence seq = DOTween.Sequence();
+
+        creditPanel.SetActive(true);
+        seq.Append(creditText1.DOFade(1, creditDuration));
+        seq.AppendCallback(() =>
+        {
+            gameisEnd = true;
+            seq.Kill();
+        });
+    }
+
+    public void DownEndingCredit()
+    {
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(creditText1.DOFade(0, creditDuration));
+        seq.AppendCallback(() =>
+        {
+            gameObject.SetActive(false);
+            QuitToManu();
             seq.Kill();
         });
     }

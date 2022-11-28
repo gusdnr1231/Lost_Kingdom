@@ -21,6 +21,8 @@ public class PlayerMove : MonoBehaviour
     /*SoundManager bgm = new SoundManager();
     AudioSource bgmSource;*/
     public AudioClip bgmClip;
+    [SerializeField] AudioClip walkSound;
+    [SerializeField] AudioSource playerSource;
 
     void Start()
     {
@@ -47,7 +49,9 @@ public class PlayerMove : MonoBehaviour
     }
     private void Move()
     {
+
         float h = Input.GetAxisRaw("Horizontal");
+        if(h != 0 && playerSource.isPlaying == false) SoundManager.instance.PlayOneShot(playerSource , walkSound);
         DirX = h;
         //playerRigid.velocity = new Vector2(h * playerCurrentSpeed, playerRigid.velocity.y);
         if (!playerDetect.detectLeft && h == -1)
