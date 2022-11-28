@@ -335,6 +335,10 @@ MonoBehaviour:
   IsAttackTime1: 0
   IsAttackTime2: 0
   IsAttackTime3: 0
+  AttackDelay1: 0
+  AttackDelay2: 0
+  AttackDelay3: 0
+  HitEffect: {fileID: 1722853914192935075, guid: 69c3edb63dced0943912ecf4679775a3, type: 3}
   canAttack: 1
   IsAttack: 0
   death: 0

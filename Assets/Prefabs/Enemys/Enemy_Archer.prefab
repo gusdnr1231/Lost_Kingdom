@@ -173,3 +173,4 @@ MonoBehaviour:
   DelayTemp: 4
   AttackSize: {x: 15, y: 1}
   CameraManager: {fileID: 0}
+  HitEffect: {fileID: 7267116486086862128, guid: 935228f32d234014f81401285b63f110, type: 3}

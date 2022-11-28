@@ -260,7 +260,7 @@ public class PlayerSkill : MonoBehaviour
             BossController boss = col.GetComponent<BossController>();
             if (boss)
             {
-                boss.TakeHit();
+                boss.TakeHit(playerMove.lasth);
             }
         }
         

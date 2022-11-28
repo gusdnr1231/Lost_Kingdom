@@ -19,6 +19,7 @@ public class BossController : MonoBehaviour
     [SerializeField] float AttackDelay1;
     [SerializeField] float AttackDelay2;
     [SerializeField] float AttackDelay3;
+    [SerializeField] GameObject HitEffect;
 	private float currentCoolTime;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigid;
@@ -142,11 +143,13 @@ public class BossController : MonoBehaviour
             animator.SetBool("Walk", false);
         }
     }
-    public void TakeHit()
+    public void TakeHit(float AttackPos)
     {
         if (canHit)
         {
-            bossHp -= 1;
+			if (AttackPos == 1) Instantiate(HitEffect, transform.position, Quaternion.Euler(0, 0, 0));
+			else if (AttackPos == -1) Instantiate(HitEffect, transform.position, Quaternion.Euler(0, 180, 0));
+			bossHp -= 1;
 			animator.SetTrigger("TakeHit");
         }
         if(bossHp == 0)

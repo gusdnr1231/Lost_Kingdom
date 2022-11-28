@@ -663,6 +663,7 @@ MonoBehaviour:
   AttackZoneParent: {fileID: 2682792140536706372}
   wallJumpX: 8
   wallJumpY: 8
+  lasth: 0
   bgmClip: {fileID: 8300000, guid: d94cd01de31fe5c42b74036688fa7ad1, type: 3}
 --- !u!114 &5915570517523190238
 MonoBehaviour:
@@ -692,11 +693,22 @@ MonoBehaviour:
   boss:
     serializedVersion: 2
     m_Bits: 8192
+  CameraManager: {fileID: 0}
+  HitEffect:
+  - {fileID: 9059653904717588288, guid: 3c237157074acc94db177d362ded9598, type: 3}
+  - {fileID: 9017213835885914877, guid: 30b8c89e6b70a3f42afb475d000f5464, type: 3}
   canWindJump: 0
   GetWind: 0
   GetFire: 0
   GetWater: 0
   GetGround: 0
+  MaxHp: 0
+  CurrentHp: 0
+  MaxMp: 0
+  CurrentMp: 0
+  FireCost: 0
+  WindCost: 0
+  GroundCost: 0
   clip: {fileID: 8300000, guid: 0235eecebf6d21d4f8e8955d7711b69b, type: 3}
   source: {fileID: 5617589345979155646}
 --- !u!95 &5915570517523190239

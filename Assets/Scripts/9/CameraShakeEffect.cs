@@ -12,7 +12,6 @@ public class CameraShakeEffect : MonoBehaviour
 	
 	void Start()
 	{
-		DontDestroyOnLoad(movingCamera);
 		virtualFramingTransposer = movingCamera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
 	}
 
@@ -40,7 +39,7 @@ public class CameraShakeEffect : MonoBehaviour
 	{
 		Debug.Log("Ω√∞£ ∏ÿ√„");
 		Time.timeScale = 0;
-		yield return new WaitForSecondsRealtime(0.1f);
+		yield return new WaitForSecondsRealtime(0.01f);
 		Time.timeScale = 1;
 	}
 }

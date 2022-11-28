@@ -107,6 +107,7 @@ MonoBehaviour:
   DelayTemp: 3
   AttackSize: {x: 3, y: 1}
   CameraManager: {fileID: 0}
+  HitEffect: {fileID: 7267116486086862128, guid: 935228f32d234014f81401285b63f110, type: 3}
 --- !u!50 &5479283461047564016
 Rigidbody2D:
   serializedVersion: 4

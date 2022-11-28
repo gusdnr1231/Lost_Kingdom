@@ -6,14 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public string transferScene;
     private Player thePlayer;
     private SplashControl splash;
-    
+    [SerializeField] Transform ChangeTrans;
 
     void Awake()
     {
-		
 		if (splash == null) splash = FindObjectOfType<SplashControl>();
         if(thePlayer == null) thePlayer = FindObjectOfType<Player>();
     }
@@ -23,8 +21,7 @@ public class ChangeScene : MonoBehaviour
         if(col.CompareTag("Player"))
         {
 			splash.StartCoroutine("SceneChangeOn");
-            thePlayer.currentSceneName = transferScene;
-            SceneManager.LoadScene(transferScene);
+            thePlayer.transform.position = ChangeTrans.position;
         }
     }
 }
