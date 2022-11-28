@@ -23,18 +23,4 @@ public class SplashControl : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-	IEnumerator SceneChangeOn()
-	{
-		Color color = image.color;
-		for (int i = 100; i >= 0; i--)
-		{
-			color.a += Time.deltaTime * 0.01f;
-			image.color = color;
-			if (image.color.a >= 255)
-			{
-				checkbool = true;
-			}
-		}
-		yield return null;
-	}
 }

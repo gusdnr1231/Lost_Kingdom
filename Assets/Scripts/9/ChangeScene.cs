@@ -20,7 +20,6 @@ public class ChangeScene : MonoBehaviour
     {
         if(col.CompareTag("Player"))
         {
-			splash.StartCoroutine("SceneChangeOn");
             thePlayer.transform.position = ChangeTrans.position;
         }
     }

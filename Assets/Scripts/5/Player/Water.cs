@@ -7,6 +7,8 @@ public class Water : MonoBehaviour
     PlayerDetect playerDetect;
     PlayerElements playerElements;
     [SerializeField] float speed;
+    [SerializeField] BoxCollider2D playerDetectBox;
+    [SerializeField] LayerMask player;
     void Start()
     {
         playerElements = GameObject.Find("Player").GetComponent<PlayerElements>();
@@ -15,8 +17,8 @@ public class Water : MonoBehaviour
     void Update()
     {
         float h = Input.GetAxisRaw("Vertical");
-
-        if (playerElements.ElementWater)
+        Collider2D[] playerbox = Physics2D.OverlapBoxAll(playerDetectBox.bounds.center, playerDetectBox.bounds.size,0f, player);
+        if (playerElements.ElementWater && playerbox.Length > 0)
         {
             if(h > 0 && !playerDetect.detectUp)
             {
